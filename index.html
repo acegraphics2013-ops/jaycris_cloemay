@@ -15,10 +15,16 @@
   Names, dates, venues, program, entourage, sponsors .. "1. WEDDING DATA" (script)
   Story texts and photos ............................ DATA.story
   Photos ............................................ images/ folder + DATA.gallery
+  Fast photo versions (WebP sizes) .................. DATA.photoSizes
   Music ............................................. DATA.music.src  (+ music/ folder)
   Gift details ...................................... DATA.gifts
   Coordinator name and mobile ....................... DATA.coordinator
   RSVP deadline, seats, Google Sheet link ........... DATA.rsvp
+  Reminder message for guests ....................... DATA.rsvp.reminderText
+  Photo album link (shown after the wedding) ........ DATA.albumUrl
+  Waze pins ......................................... DATA.ceremony.wazeLL / DATA.reception.wazeLL
+  English / Bisaya text ............................. DATA.i18n
+  Site address (for guest links) .................... DATA.site.url
   Colors ............................................ ":root" in the CSS below
   Link preview (Messenger / Viber / Facebook) ....... the og: tags just below
   ===================================================================== -->
@@ -1641,11 +1647,12 @@
       box-shadow: var(--shadow)
     }
 
-    /* language toggle (English / Bisaya), bottom-left, mirrors the music button */
+    /* language toggle (English / Bisaya): top-right corner of the page. It sits above the
+       envelope intro and scrolls away with the hero, so it never covers a button. */
     .lang {
-      position: fixed;
-      left: max(14px, env(safe-area-inset-left, 0px));
-      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      position: absolute;
+      right: max(12px, env(safe-area-inset-right, 0px));
+      top: calc(12px + env(safe-area-inset-top, 0px));
       z-index: 310;
       display: flex;
       background: var(--cream);
@@ -2336,7 +2343,7 @@
       </svg></button>
   </div>
 
-  <!-- language toggle: English / Bisaya (choice is remembered on this device) -->
+  <!-- language toggle: English / Bisaya, top-right (choice is remembered on this device) -->
   <div class="lang" id="langBox" role="group" aria-label="Language">
     <button type="button" data-lang="en" lang="en" aria-pressed="true" aria-label="English">EN</button>
     <button type="button" data-lang="ceb" lang="ceb" aria-pressed="false" aria-label="Bisaya">BIS</button>
@@ -3245,7 +3252,7 @@
       /* ---------- ADMIN (?admin) ---------- */
       function initAdmin() {
         $('#site').hidden = true; $('#intro').remove(); $('#langBox').remove(); $('#admin').hidden = false; document.title = 'RSVP Admin';
-        document.documentElement.lang = 'en';
+        document.documentElement.lang = 'en'; $('.skip').href = '#admin';
         const A = { rows: [], shown: [], guests: [], pending: [] };
         const post = body => fetch(R.scriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).then(r => r.json());
         const isYes = r => /^joyfully/i.test(r.attending);
