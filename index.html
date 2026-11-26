@@ -23,27 +23,111 @@
   Link preview (Messenger / Viber / Facebook) ....... the og: tags just below
   ===================================================================== -->
 
-  <!-- Link preview. After your first deploy, replace YOUR-SITE.vercel.app with
-     your real address (it must be a full https:// address for Messenger/Viber). -->
+  <!-- Link preview (Messenger / Viber / Facebook). Must be full https:// addresses.
+     If the site address ever changes, update og:url and og:image here and DATA.site.url. -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jay Cris &amp; Cloe May">
   <meta property="og:title" content="Jay Cris &amp; Cloe May | December 18, 2026">
   <meta property="og:description" content="You're invited to our wedding! Kindly RSVP by December 10, 2026.">
-  <meta property="og:image" content="https://YOUR-SITE.vercel.app/images/og-image.jpg">
+  <meta property="og:image" content="https://jaycriscloemay.vercel.app/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Jay Cris and Cloe May, prenup photo">
-  <meta property="og:url" content="https://YOUR-SITE.vercel.app/">
+  <meta property="og:url" content="https://jaycriscloemay.vercel.app/">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F4A582'/%3E%3Ctext x='32' y='41' font-size='26' text-anchor='middle' fill='%23FFFAF5' font-family='Georgia' font-style='italic'%3EJC%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-    rel="stylesheet">
+  <!-- icon used when a guest adds the site to their iPhone/iPad home screen -->
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- Fonts are self-hosted in fonts/ (see @font-face below). Preload the two
+       the envelope intro needs first so the script names do not "jump". -->
+  <link rel="preload" href="fonts/great-vibes-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Hero photo: start downloading right away. Keep in step with DATA.heroPhoto. -->
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+    imagesrcset="images/prenup-1-600.webp 600w, images/prenup-1-1200.webp 1200w, images/prenup-1-1800.webp 1800w"
+    imagesizes="100vw">
 
   <style>
+    /* =====================================================================
+   FONTS (self-hosted woff2, SIL Open Font License). Montserrat and
+   Playfair Display are variable fonts: one file covers weights 400-600.
+   "latin" covers English and Bisaya; "latin-ext" covers rarer letters.
+   ===================================================================== */
+    @font-face {
+      font-family: "Great Vibes";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/great-vibes-latin.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+      font-family: "Great Vibes";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/great-vibes-latin-ext.woff2) format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url(fonts/montserrat-latin.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url(fonts/montserrat-latin-ext.woff2) format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+      font-family: "Playfair Display";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url(fonts/playfair-display-latin.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+      font-family: "Playfair Display";
+      font-style: normal;
+      font-weight: 400 600;
+      font-display: swap;
+      src: url(fonts/playfair-display-latin-ext.woff2) format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+      font-family: "Playfair Display";
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/playfair-display-italic-latin.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+      font-family: "Playfair Display";
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url(fonts/playfair-display-italic-latin-ext.woff2) format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
     /* =====================================================================
    COLORS: change the palette here and the whole site follows.
    ===================================================================== */
@@ -102,7 +186,13 @@
 
     img {
       max-width: 100%;
+      height: auto;
       display: block
+    }
+
+    /* <picture> wraps photos for WebP; it should not add a box of its own */
+    picture {
+      display: contents
     }
 
     a {
@@ -479,6 +569,11 @@
       mask-image: linear-gradient(to bottom, transparent 0, #000 34%)
     }
 
+    /* wrapper only; must not become a flex item of .hero */
+    #heroPic {
+      display: contents
+    }
+
     .hero-tint {
       position: absolute;
       inset: 0;
@@ -587,6 +682,12 @@
       font: italic 500 1.3rem var(--serif)
     }
 
+    /* post-wedding: "Thank you" message and photo album button */
+    .count.done .album {
+      display: block;
+      margin-top: 1rem
+    }
+
     .cta {
       display: flex;
       gap: .6rem;
@@ -675,6 +776,15 @@
     }
 
     /* invitation */
+    .dear {
+      font: 400 clamp(2rem, 8vw, 2.6rem)/1.2 var(--script);
+      color: var(--rose);
+      text-align: center;
+      margin: 0 auto .6rem;
+      max-width: 38rem;
+      overflow-wrap: anywhere
+    }
+
     .arch {
       width: min(17rem, 70%);
       aspect-ratio: 3/4;
@@ -1178,6 +1288,8 @@
     }
 
     .lb figure img {
+      width: auto;
+      height: auto;
       max-height: 80svh;
       max-width: 100%;
       margin: 0 auto;
@@ -1424,6 +1536,23 @@
       margin: 0 0 .6rem
     }
 
+    /* calendar + Waze buttons on the thank-you screen */
+    .thanks .acts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      justify-content: center;
+      margin: 1rem 0 0
+    }
+
+    .thanks .acts-title {
+      font: 500 .7rem/1.4 var(--sans);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--rose-text);
+      margin: 1.4rem 0 0
+    }
+
     .devnote {
       background: #FFF3CD;
       border: 1px solid #E6C86E;
@@ -1510,6 +1639,39 @@
       place-items: center;
       cursor: pointer;
       box-shadow: var(--shadow)
+    }
+
+    /* language toggle (English / Bisaya), bottom-left, mirrors the music button */
+    .lang {
+      position: fixed;
+      left: max(14px, env(safe-area-inset-left, 0px));
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      z-index: 310;
+      display: flex;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      box-shadow: var(--shadow)
+    }
+
+    .lang button {
+      border: 0;
+      background: none;
+      color: var(--text);
+      font: 600 .68rem/1 var(--sans);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      min-height: 2.5rem;
+      min-width: 2.75rem;
+      padding: 0 .7rem;
+      border-radius: 999px;
+      cursor: pointer
+    }
+
+    .lang button[aria-pressed="true"] {
+      background: var(--blush);
+      color: var(--rose-text)
     }
 
     .toast {
@@ -1649,6 +1811,59 @@
       color: #8A2A22
     }
 
+    /* admin tabs: "Replies" and "Guest links" */
+    .tabs {
+      display: flex;
+      gap: .4rem;
+      border-bottom: 1px solid var(--line);
+      margin: 0 0 1.4rem
+    }
+
+    .tabs button {
+      border: 0;
+      background: none;
+      font: 600 .78rem/1 var(--sans);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+      padding: .9rem 1rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px
+    }
+
+    .tabs button[aria-selected="true"] {
+      color: var(--rose-text);
+      border-bottom-color: var(--rose)
+    }
+
+    .admin h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 .6rem
+    }
+
+    .admin textarea {
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: .88rem;
+      min-height: 8rem
+    }
+
+    td.link {
+      word-break: break-all;
+      min-width: 14rem;
+      font-size: .8rem
+    }
+
+    td .btn.sm {
+      white-space: nowrap
+    }
+
+    /* the real file input is visually hidden; show its focus on the label */
+    #glFile:focus-visible+.upl {
+      outline: 3px solid var(--rose-text);
+      outline-offset: 3px
+    }
+
     /* scroll reveal: only hides when JS is running */
     .js .reveal {
       opacity: 0;
@@ -1770,6 +1985,7 @@
 
       .intro,
       .topbar,
+      .lang,
       .music {
         display: none !important
       }
@@ -1853,9 +2069,9 @@
         <div class="env-flap"></div>
         <div class="env-seal" aria-hidden="true">J&amp;C</div>
       </div>
-      <p class="intro-hello">You are invited</p>
-      <button class="btn" id="openBtn" type="button">Tap to open</button><br>
-      <button class="linkbtn" id="skipBtn" type="button">Skip</button>
+      <p class="intro-hello" data-i18n="introHello">You are invited</p>
+      <button class="btn" id="openBtn" type="button" data-i18n="openBtn">Tap to open</button><br>
+      <button class="linkbtn" id="skipBtn" type="button" data-i18n="skipBtn">Skip</button>
     </div>
   </div>
 
@@ -1865,30 +2081,36 @@
       <div class="wrap">
         <a class="mono" href="#top" aria-label="Back to top">J &amp; C</a>
         <div class="pills" id="pills">
-          <a href="#invitation">Invitation</a><a href="#story">Our Story</a><a href="#program">Program</a><a
-            href="#venues">Venues</a><a href="#entourage">Entourage</a><a href="#dresscode">Dress Code</a><a
-            href="#gifts">Gifts</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a><a href="#rsvp">RSVP</a>
+          <a href="#invitation" data-i18n="navInvitation">Invitation</a><a href="#story"
+            data-i18n="navStory">Our Story</a><a href="#program" data-i18n="navProgram">Program</a><a
+            href="#venues" data-i18n="navVenues">Venues</a><a href="#entourage"
+            data-i18n="navEntourage">Entourage</a><a href="#dresscode" data-i18n="navDress">Dress Code</a><a
+            href="#gifts" data-i18n="navGifts">Gifts</a><a href="#gallery" data-i18n="navGallery">Gallery</a><a
+            href="#faq" data-i18n="navFaq">FAQ</a><a href="#rsvp" data-i18n="navRsvp">RSVP</a>
         </div>
-        <a class="btn sm" href="#rsvp">RSVP</a>
+        <a class="btn sm" href="#rsvp" data-i18n="navRsvp">RSVP</a>
       </div>
     </nav>
 
     <main id="main">
       <!-- 1. HERO -->
       <header class="hero" id="top">
-        <img class="hero-img" id="heroImg" alt="" fetchpriority="high">
+        <!-- hero photo: filled from DATA.heroPhoto as a WebP <picture> -->
+        <div id="heroPic"></div>
         <div class="hero-tint"></div>
         <span data-floral="tl"></span><span data-floral="br"></span>
         <div class="in">
           <div class="monogram" aria-label="Monogram J and C"><span>J &amp; C</span></div>
-          <p class="kicker">We're getting married!</p>
+          <p class="kicker" data-i18n="kicker">We're getting married!</p>
           <h1 class="names" id="heroNames"></h1>
         </div>
         <div class="in">
           <p class="hero-date" id="heroDate"></p>
           <p class="hero-sub" id="heroSub"></p>
+          <!-- countdown; after DATA.event.endISO it becomes the "Thank you" message -->
           <div class="count" id="count" role="timer" aria-label="Countdown to the wedding"></div>
-          <div class="cta"><a class="btn" href="#rsvp">RSVP</a><a class="btn ghost" href="#venues">Event details</a>
+          <div class="cta"><a class="btn" href="#rsvp" data-i18n="navRsvp">RSVP</a><a class="btn ghost"
+              href="#venues" data-i18n="ctaDetails">Event details</a>
           </div>
         </div>
       </header>
@@ -1898,13 +2120,15 @@
         <span data-floral="tr"></span>
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">The Invitation</p>
-            <h2 id="h-inv">Together with our families</h2>
+            <p class="eyebrow" data-i18n="invEyebrow">The Invitation</p>
+            <h2 id="h-inv" data-i18n="invTitle">Together with our families</h2>
             <div class="divider" data-divider></div>
           </div>
-          <div class="arch reveal"><img id="invImg" alt="" loading="lazy"></div>
-          <p class="lead reveal">Together with our families, we joyfully invite you to celebrate our union in Holy
-            Matrimony.</p>
+          <div class="arch reveal" id="invPic"></div>
+          <!-- personal greeting, only shown for links with ?to=Guest%20Name -->
+          <p class="dear reveal" id="dear" hidden></p>
+          <p class="lead reveal" data-i18n="invMessage">Together with our families, we joyfully invite you to
+            celebrate our union in Holy Matrimony.</p>
           <div class="parents reveal" id="parents"></div>
         </div>
       </section>
@@ -1913,8 +2137,8 @@
       <section class="sec" id="story" aria-labelledby="h-story">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">Our Love Story</p>
-            <h2 id="h-story">How we got here</h2>
+            <p class="eyebrow" data-i18n="storyEyebrow">Our Love Story</p>
+            <h2 id="h-story" data-i18n="storyTitle">How we got here</h2>
             <div class="divider" data-divider></div>
           </div>
           <div class="tline" id="timeline"></div>
@@ -1925,18 +2149,18 @@
       <section class="sec alt" id="program" aria-labelledby="h-prog">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">Wedding Program</p>
-            <h2 id="h-prog">The day, hour by hour</h2>
+            <p class="eyebrow" data-i18n="progEyebrow">Wedding Program</p>
+            <h2 id="h-prog" data-i18n="progTitle">The day, hour by hour</h2>
             <div class="divider" data-divider></div>
           </div>
           <ol class="prog reveal" id="progList"></ol>
           <div class="cal reveal">
             <a class="btn sm" id="gcalBtn" href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true">
                 <use href="#i-cal" />
-              </svg> Google Calendar</a>
+              </svg> <span data-i18n="gcal">Google Calendar</span></a>
             <button class="btn sm ghost" id="icsBtn" type="button"><svg class="ico" aria-hidden="true">
                 <use href="#i-cal" />
-              </svg> Apple Calendar (.ics)</button>
+              </svg> <span data-i18n="ics">Apple Calendar (.ics)</span></button>
           </div>
         </div>
       </section>
@@ -1945,8 +2169,8 @@
       <section class="sec" id="venues" aria-labelledby="h-ven">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">Venues</p>
-            <h2 id="h-ven">Where to find us</h2>
+            <p class="eyebrow" data-i18n="venEyebrow">Venues</p>
+            <h2 id="h-ven" data-i18n="venTitle">Where to find us</h2>
             <div class="divider" data-divider></div>
           </div>
           <div class="venues" id="venueList"></div>
@@ -1957,8 +2181,8 @@
       <section class="sec alt" id="entourage" aria-labelledby="h-ent">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">Entourage</p>
-            <h2 id="h-ent">The people beside us</h2>
+            <p class="eyebrow" data-i18n="entEyebrow">Entourage</p>
+            <h2 id="h-ent" data-i18n="entTitle">The people beside us</h2>
             <div class="divider" data-divider></div>
           </div>
           <div id="entourageBody"></div>
@@ -1969,13 +2193,13 @@
       <section class="sec" id="dresscode" aria-labelledby="h-dress">
         <div class="wrap center">
           <div class="sec-head reveal">
-            <p class="eyebrow">Dress Code</p>
-            <h2 id="h-dress">Peach and cream</h2>
+            <p class="eyebrow" data-i18n="dressEyebrow">Dress Code</p>
+            <h2 id="h-dress" data-i18n="dressTitle">Peach and cream</h2>
             <div class="divider" data-divider></div>
           </div>
           <p class="lead reveal" id="dressText"></p>
           <div class="swatches reveal" id="swatches"></div>
-          <p class="attire reveal">Semi-formal attire; kindly avoid white</p>
+          <p class="attire reveal" data-i18n="attire">Semi-formal attire; kindly avoid white</p>
         </div>
       </section>
 
@@ -1983,12 +2207,12 @@
       <section class="sec alt" id="gifts" aria-labelledby="h-gift">
         <div class="wrap center">
           <div class="sec-head reveal">
-            <p class="eyebrow">Gift Guide</p>
-            <h2 id="h-gift">Your presence is the greatest gift</h2>
+            <p class="eyebrow" data-i18n="giftEyebrow">Gift Guide</p>
+            <h2 id="h-gift" data-i18n="giftTitle">Your presence is the greatest gift</h2>
             <div class="divider" data-divider></div>
           </div>
-          <p class="lead reveal">But if you wish to bless us as we begin our new life together, a monetary gift would be
-            sincerely appreciated.</p>
+          <p class="lead reveal" data-i18n="giftLead">But if you wish to bless us as we begin our new life together, a
+            monetary gift would be sincerely appreciated.</p>
           <button class="btn reveal" id="giftBtn" type="button" aria-expanded="false" aria-controls="giftBox">Show
             details</button>
           <div class="gift" id="giftBox" hidden></div>
@@ -1999,8 +2223,8 @@
       <section class="sec" id="gallery" aria-labelledby="h-gal">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">Prenup Gallery</p>
-            <h2 id="h-gal">A few of our favorites</h2>
+            <p class="eyebrow" data-i18n="galEyebrow">Prenup Gallery</p>
+            <h2 id="h-gal" data-i18n="galTitle">A few of our favorites</h2>
             <div class="divider" data-divider></div>
           </div>
           <div class="gal reveal" id="gal"></div>
@@ -2011,8 +2235,8 @@
       <section class="sec alt" id="faq" aria-labelledby="h-faq">
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">FAQ</p>
-            <h2 id="h-faq">Good to know</h2>
+            <p class="eyebrow" data-i18n="faqEyebrow">FAQ</p>
+            <h2 id="h-faq" data-i18n="faqTitle">Good to know</h2>
             <div class="divider" data-divider></div>
           </div>
           <div class="faq reveal" id="faqList"></div>
@@ -2024,65 +2248,71 @@
         <span data-floral="bl"></span><span data-floral="tr"></span>
         <div class="wrap">
           <div class="sec-head reveal">
-            <p class="eyebrow">RSVP</p>
-            <h2 id="h-rsvp">Will you celebrate with us?</h2>
+            <p class="eyebrow" data-i18n="rsvpEyebrow">RSVP</p>
+            <h2 id="h-rsvp" data-i18n="rsvpTitle">Will you celebrate with us?</h2>
             <div class="divider" data-divider></div>
             <p class="note" style="margin-top:1rem" id="rsvpNote"></p>
+            <!-- explains how to change a reply (same name + same mobile = update) -->
+            <p class="note" id="rsvpEditNote" data-i18n="rsvpEditNote">Need to change your reply? Send the form again
+              with the same name and the same mobile number, and we will update it.</p>
           </div>
           <div class="formcard reveal" id="formCard">
             <form id="rsvpForm" novalidate autocomplete="on">
               <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input type="text"
                   id="website" name="website" tabindex="-1" autocomplete="off"></div>
               <div>
-                <label for="fname">Full name</label>
+                <label for="fname" data-i18n="lblName">Full name</label>
                 <input type="text" id="fname" name="name" autocomplete="name" maxlength="80" required
                   aria-describedby="e-name">
                 <p class="err" id="e-name" role="alert" hidden></p>
               </div>
               <div>
-                <label for="fmobile">Mobile number</label>
+                <label for="fmobile" data-i18n="lblMobile">Mobile number</label>
                 <input type="tel" id="fmobile" name="mobile" inputmode="numeric" autocomplete="tel"
                   placeholder="09XXXXXXXXX" maxlength="13" required aria-describedby="e-mobile">
                 <p class="err" id="e-mobile" role="alert" hidden></p>
               </div>
               <fieldset>
-                <legend>Will you attend?</legend>
+                <legend data-i18n="lblAttend">Will you attend?</legend>
                 <div class="choice">
-                  <label><input type="radio" name="attend" value="yes" checked><span>Joyfully accepts</span></label>
-                  <label><input type="radio" name="attend" value="no"><span>Regretfully declines</span></label>
+                  <label><input type="radio" name="attend" value="yes" checked><span
+                      data-i18n="optYes">Joyfully accepts</span></label>
+                  <label><input type="radio" name="attend" value="no"><span data-i18n="optNo">Regretfully
+                      declines</span></label>
                 </div>
               </fieldset>
               <div id="seatRow">
-                <label for="fseats">Seats reserved for you</label>
+                <label for="fseats" id="lblSeats">Seats reserved for you</label>
                 <select id="fseats" name="seats"></select>
               </div>
               <div id="dietRow">
-                <label for="fdiet">Dietary restrictions or allergies (optional)</label>
-                <input type="text" id="fdiet" name="diet" maxlength="200" placeholder="None">
+                <label for="fdiet" data-i18n="lblDiet">Dietary restrictions or allergies (optional)</label>
+                <input type="text" id="fdiet" name="diet" maxlength="200" placeholder="None"
+                  data-i18n-ph="phDiet">
               </div>
               <div>
-                <label for="fmsg">Message for the couple (optional)</label>
+                <label for="fmsg" data-i18n="lblMsg">Message for the couple (optional)</label>
                 <textarea id="fmsg" name="message" maxlength="500"></textarea>
               </div>
               <p class="err" id="e-form" role="alert" hidden></p>
-              <button class="btn" type="submit" id="sendBtn">Send my RSVP</button>
+              <button class="btn" type="submit" id="sendBtn" data-i18n="btnSend">Send my RSVP</button>
             </form>
             <div id="thanks" class="thanks" hidden aria-live="polite"></div>
           </div>
-          <p class="closed" id="closedMsg" hidden>RSVPs are now closed. For concerns, please contact our coordinator.
-          </p>
+          <p class="closed" id="closedMsg" hidden data-i18n="closedMsg">RSVPs are now closed. For concerns, please
+            contact our coordinator.</p>
         </div>
       </section>
 
       <!-- 12. HASHTAG -->
       <section class="sec alt hash" id="hashtag" aria-labelledby="h-hash">
         <div class="wrap">
-          <p class="eyebrow">Share the joy</p>
-          <h2 id="h-hash" style="font-size:1.3rem">Share your photos with</h2>
+          <p class="eyebrow" data-i18n="hashEyebrow">Share the joy</p>
+          <h2 id="h-hash" style="font-size:1.3rem" data-i18n="hashTitle">Share your photos with</h2>
           <p class="tag" id="hashText"></p>
           <button class="btn" id="hashBtn" type="button"><svg class="ico" aria-hidden="true">
               <use href="#i-copy" />
-            </svg> Copy hashtag</button>
+            </svg> <span data-i18n="hashCopy">Copy hashtag</span></button>
         </div>
       </section>
     </main>
@@ -2091,7 +2321,7 @@
     <footer>
       <span data-floral="tl"></span><span data-floral="br"></span>
       <div class="wrap">
-        <p>For questions, contact our wedding coordinator,</p>
+        <p data-i18n="footerContact">For questions, contact our wedding coordinator,</p>
         <p class="coord" id="coord"></p>
         <p class="fnames">Jay Cris &amp; Cloe May</p>
         <small>12.18.2026</small>
@@ -2104,6 +2334,12 @@
         class="ico" aria-hidden="true">
         <use href="#i-music" id="musicIco" />
       </svg></button>
+  </div>
+
+  <!-- language toggle: English / Bisaya (choice is remembered on this device) -->
+  <div class="lang" id="langBox" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en" aria-pressed="true" aria-label="English">EN</button>
+    <button type="button" data-lang="ceb" lang="ceb" aria-pressed="false" aria-label="Bisaya">BIS</button>
   </div>
 
   <!-- lightbox -->
@@ -2128,6 +2364,15 @@
         <button class="btn" type="submit" id="aSign">Sign in</button>
       </form>
       <div id="adminBody" hidden>
+        <div class="tabs" role="tablist" aria-label="Admin sections">
+          <button type="button" role="tab" id="tabReplies" aria-controls="panelReplies"
+            aria-selected="true">Replies</button>
+          <button type="button" role="tab" id="tabLinks" aria-controls="panelLinks" aria-selected="false"
+            tabindex="-1">Guest links</button>
+        </div>
+
+        <!-- ===== Tab 1: replies from the Google Sheet ===== -->
+        <div role="tabpanel" id="panelReplies" aria-labelledby="tabReplies">
         <div class="stats">
           <div><b id="stAtt">0</b><span>Attending</span></div>
           <div><b id="stDec">0</b><span>Declined</span></div>
@@ -2165,6 +2410,57 @@
             <tbody id="aRows"></tbody>
           </table>
         </div>
+        </div>
+
+        <!-- ===== Tab 2: personal invite links + who has not replied yet ===== -->
+        <div role="tabpanel" id="panelLinks" aria-labelledby="tabLinks" hidden>
+          <p class="note">One guest per line: <code>name,seats</code> (for example <code>Maria Santos,2</code>).
+            A first line of <code>name,seats</code> is skipped. A blank seat count uses the default
+            (<span id="glDefault"></span>). Export a sheet as CSV, or paste the two columns here.</p>
+          <label for="glCsv">Guest list (CSV)</label>
+          <textarea id="glCsv" spellcheck="false" placeholder="name,seats&#10;Maria Santos,2&#10;Juan Dela Cruz,1"></textarea>
+          <div class="tools" style="margin-top:.8rem">
+            <input type="file" id="glFile" accept=".csv,.txt,text/csv,text/plain" class="sr">
+            <label class="btn sm ghost upl" for="glFile" style="margin:0">Upload CSV file</label>
+            <button class="btn sm" type="button" id="glMake">Generate links</button>
+            <button class="btn sm ghost" type="button" id="glCopyAll" disabled>Copy all</button>
+          </div>
+          <p class="note" id="glCount" aria-live="polite"></p>
+          <div class="tablewrap" tabindex="0" aria-label="Guest links table, scrollable">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Seats</th>
+                  <th>Personal link</th>
+                  <th><span class="sr">Copy</span></th>
+                </tr>
+              </thead>
+              <tbody id="glRows"><tr><td colspan="5">Paste or upload your guest list, then press Generate links.</td></tr></tbody>
+            </table>
+          </div>
+
+          <h2>Not yet replied</h2>
+          <p class="note" id="nrCount">Generate the guest links first. Names are matched to the RSVP sheet
+            ignoring capital letters, accents and extra spaces.</p>
+          <div class="tools">
+            <button class="btn sm" type="button" id="nrCopy" disabled>Copy all reminders</button>
+          </div>
+          <div class="tablewrap" tabindex="0" aria-label="Guests who have not replied, scrollable">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Seats</th>
+                  <th><span class="sr">Copy</span></th>
+                </tr>
+              </thead>
+              <tbody id="nrRows"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -2176,6 +2472,10 @@
        1. WEDDING DATA  ← edit everything about the wedding here
        ===================================================================== */
     const DATA = {
+
+      /* ---- The site's public address. Used for guest links when the admin page is
+              opened from your computer (file://). Keep the slash at the end. ---- */
+      site: { url: "https://jaycriscloemay.vercel.app/" },
 
       /* ---- Couple ---- */
       couple: {
@@ -2189,24 +2489,32 @@
       /* ---- Date and time (Philippine time, UTC+8). Keep the +08:00 ---- */
       event: {
         startISO: "2026-12-18T13:00:00+08:00",   // ceremony start (countdown and calendar)
-        endISO: "2026-12-18T22:00:00+08:00",   // calendar end time
+        endISO: "2026-12-18T22:00:00+08:00",   // calendar end time; after this the site switches to "Thank you" mode
         dateLong: "Friday, December 18, 2026",
         timeText: "1:00 PM"
       },
 
-      /* ---- Venues. mapQuery is what Google Maps searches for; paste a more exact
-              place name or coordinates there if the pin is off. ---- */
+      /* ---- Post-wedding: link to your photo album (Google Photos, Facebook album...).
+              Shown after event.endISO. Leave "" to hide the button. ---- */
+      albumUrl: "",
+
+      /* ---- Venues. mapQuery is what Google Maps (and Waze) search for; paste a more exact
+              place name there if the pin is off.
+              wazeLL: optional exact "latitude,longitude" for Waze, e.g. "8.9452,126.0141"
+              (in Google Maps, long-press the pin and copy the numbers). "" = search by mapQuery. ---- */
       ceremony: {
         tag: "Ceremony", time: "1:00 PM",
         place: "San Pedro Pio Parish",
         address: "Tina, San Miguel, Surigao del Sur",
-        mapQuery: "San Pedro Pio Parish, Tina, San Miguel, Surigao del Sur"
+        mapQuery: "San Pedro Pio Parish, Tina, San Miguel, Surigao del Sur",
+        wazeLL: ""
       },
       reception: {
         tag: "Reception", time: "5:00 PM",
         place: "JBT Resort",
         address: "Victoria, Tago, Surigao del Sur",
-        mapQuery: "JBT Resort, Victoria, Tago, Surigao del Sur"
+        mapQuery: "JBT Resort, Victoria, Tago, Surigao del Sur",
+        wazeLL: ""
       },
 
       /* ---- Program: [time, what happens] ---- */
@@ -2372,8 +2680,21 @@
       heroPhoto: { src: "images/prenup-1.jpg", alt: "Jay Cris and Cloe May embracing among coconut trees", pos: "48% 40%" },
       invitePhoto: { src: "images/prenup-2.jpg", alt: "Jay Cris and Cloe May standing back to back on a garden path" },
 
+      /* ---- Fast-loading photo versions (see README, "Photos"). For each JPG listed here the
+              site also serves smaller WebP copies named like "prenup-1-600.webp", plus a
+              smaller JPG fallback ("prenup-1-800.jpg").
+              w / h = size of the original JPG in pixels; webp = widths of the WebP copies.
+              A photo NOT listed here still works; it just loads the original JPG. ---- */
+      photoSizes: {
+        "images/prenup-1.jpg": { w: 1800, h: 1200, webp: [600, 1200, 1800], small: 800 },
+        "images/prenup-2.jpg": { w: 1800, h: 1200, webp: [600, 1200, 1800], small: 800 },
+        "images/prenup-3.jpg": { w: 1200, h: 1800, webp: [600, 1200], small: 800 }
+      },
+
       /* ---- Music. EDIT: put your mp3 in the music/ folder and write its path here,
-              e.g. "music/our-song.mp3". Leave "" to hide the music button. Use a song you may share. ---- */
+              e.g. "music/our-song.mp3". Leave "" to hide the music button. Use a song you may share.
+              It starts when the guest taps "Tap to open"; the button in the corner mutes it,
+              and the mute choice is remembered until the browser tab is closed. ---- */
       music: { src: "" },
 
       /* ---- FAQ ---- */
@@ -2393,7 +2714,179 @@
         deadlineISO: "2026-12-10T23:59:59+08:00",   // form closes after this moment
         deadlineText: "December 10, 2026",
         defaultMaxSeats: 2,                          // can be set per guest with ?seats=3 in their link
-        adminHint: "The admin password is set in google-apps-script/Code.gs"
+        adminHint: "The admin password is set in google-apps-script/Code.gs",
+        /* Reminder copied from the admin "Not yet replied" list.
+           {name} = guest name, {link} = their personal link, {deadline} = deadlineText above. */
+        reminderText: "Hi {name}! This is a friendly reminder to RSVP for the wedding of Jay Cris & Cloe May on December 18, 2026. Kindly reply on or before {deadline} here: {link} Thank you!"
+      },
+
+      /* =================================================================
+         LANGUAGES. Guests switch with the EN / BIS button (bottom-left);
+         the choice is remembered on their device. English is the default.
+         "en" holds the English text. "ceb" (Bisaya) holds the translations:
+         any key missing from "ceb" falls back to English.
+         {name}, {n}, {deadline}, {date}, {groom}, {bride} are filled in by the site.
+         ================================================================= */
+      i18n: {
+        default: "en",
+        en: {
+          navInvitation: "Invitation", navStory: "Our Story", navProgram: "Program", navVenues: "Venues",
+          navEntourage: "Entourage", navDress: "Dress Code", navGifts: "Gifts", navGallery: "Gallery", navFaq: "FAQ", navRsvp: "RSVP",
+          introHello: "You are invited", openBtn: "Tap to open", skipBtn: "Skip",
+          kicker: "We're getting married!", ctaDetails: "Event details",
+          /* English date, deadline, dress text and FAQ come from DATA.event.dateLong,
+             DATA.rsvp.deadlineText, DATA.dress.text and DATA.faq above. */
+          cdDays: "Days", cdHours: "Hours", cdMins: "Mins", cdSecs: "Secs",
+          cdToday: "Today is the day!", cdPost: "Thank you for celebrating with us", albumBtn: "View our photo album",
+          invEyebrow: "The Invitation", invTitle: "Together with our families",
+          dear: "Dear {name},",
+          invMessage: "Together with our families, we joyfully invite you to celebrate our union in Holy Matrimony.",
+          parentsGroom: "Parents of the Groom", parentsBride: "Parents of the Bride",
+          storyEyebrow: "Our Love Story", storyTitle: "How we got here",
+          progEyebrow: "Wedding Program", progTitle: "The day, hour by hour",
+          gcal: "Google Calendar", ics: "Apple Calendar (.ics)", icsReady: "Calendar file ready",
+          venEyebrow: "Venues", venTitle: "Where to find us", directions: "Get Directions",
+          entEyebrow: "Entourage", entTitle: "The people beside us",
+          dressEyebrow: "Dress Code", dressTitle: "Peach and cream",
+          attire: "Semi-formal attire; kindly avoid white", avoidWhite: "Avoid white",
+          giftEyebrow: "Gift Guide", giftTitle: "Your presence is the greatest gift",
+          giftLead: "But if you wish to bless us as we begin our new life together, a monetary gift would be sincerely appreciated.",
+          giftShow: "Show details", giftHide: "Hide details",
+          galEyebrow: "Prenup Gallery", galTitle: "A few of our favorites",
+          faqEyebrow: "FAQ", faqTitle: "Good to know",
+          rsvpEyebrow: "RSVP", rsvpTitle: "Will you celebrate with us?",
+          rsvpNote: "Kindly reply on or before {deadline}.",
+          rsvpEditNote: "Need to change your reply? Send the form again with the same name and the same mobile number, and we will update it.",
+          lblName: "Full name", lblMobile: "Mobile number", lblAttend: "Will you attend?",
+          optYes: "Joyfully accepts", optNo: "Regretfully declines",
+          lblSeats: "Seats reserved for you", lblSeatOne: "Seat reserved for you: 1", seatOne: "{n} seat", seatMany: "{n} seats",
+          lblDiet: "Dietary restrictions or allergies (optional)", phDiet: "None",
+          lblMsg: "Message for the couple (optional)",
+          btnSend: "Send my RSVP", btnSending: "Sending...",
+          errName: "Please enter your full name.",
+          errMobile: "Please enter an 11-digit mobile number starting with 09, like 09171234567.",
+          errDup: "We already have an RSVP under this name. To change it, send the form again with the same mobile number you used the first time. If you no longer have that number, please contact our coordinator.",
+          errGeneric: "Something went wrong. Please check your details and try again.",
+          errNetwork: "We could not send your RSVP. Please check your internet connection and try again.",
+          closedMsg: "RSVPs are now closed. For concerns, please contact our coordinator.",
+          thanksTitle: "Thank you!", thanksUpdated: "Your RSVP has been updated.",
+          thanksYes: "{groom} & {bride} can't wait to celebrate with you.",
+          thanksNo: "Thank you for letting us know. You will be in our hearts on our special day.",
+          thanksArrive: "Please arrive at the church by 12:30 PM. See you on {date}.",
+          saveDate: "Save the date", gcalAdd: "Add to Google Calendar", icsAdd: "Download .ics",
+          wazeTitle: "Directions with Waze", wazeTo: "Waze to {place}",
+          hashEyebrow: "Share the joy", hashTitle: "Share your photos with", hashCopy: "Copy hashtag",
+          hashCopied: "Hashtag copied", copyFail: "Press and hold to copy",
+          footerContact: "For questions, contact our wedding coordinator,",
+          musicPlay: "Play music", musicMute: "Mute music", musicFail: "Music could not play"
+        },
+        ceb: {
+          navInvitation: "Imbitasyon",                       // REVIEW WITH A NATIVE SPEAKER
+          navStory: "Among Istorya",                         // REVIEW WITH A NATIVE SPEAKER
+          navProgram: "Programa",                            // REVIEW WITH A NATIVE SPEAKER
+          navVenues: "Mga Lugar",                            // REVIEW WITH A NATIVE SPEAKER
+          navEntourage: "Entourage",                         // REVIEW WITH A NATIVE SPEAKER
+          navDress: "Sinul-ob",                              // REVIEW WITH A NATIVE SPEAKER
+          navGifts: "Regalo",                                // REVIEW WITH A NATIVE SPEAKER
+          navGallery: "Mga Litrato",                         // REVIEW WITH A NATIVE SPEAKER
+          navFaq: "Pangutana",                               // REVIEW WITH A NATIVE SPEAKER
+          navRsvp: "RSVP",                                   // REVIEW WITH A NATIVE SPEAKER
+          introHello: "Gidapit ka",                          // REVIEW WITH A NATIVE SPEAKER
+          openBtn: "I-tap aron maablihan",                   // REVIEW WITH A NATIVE SPEAKER
+          skipBtn: "Laktawi",                                // REVIEW WITH A NATIVE SPEAKER
+          kicker: "Magminyo na mi!",                         // REVIEW WITH A NATIVE SPEAKER
+          ctaDetails: "Mga detalye",                         // REVIEW WITH A NATIVE SPEAKER
+          dateLong: "Biyernes, Disyembre 18, 2026",          // REVIEW WITH A NATIVE SPEAKER
+          deadline: "Disyembre 10, 2026",                    // REVIEW WITH A NATIVE SPEAKER
+          cdDays: "Adlaw",                                   // REVIEW WITH A NATIVE SPEAKER
+          cdHours: "Oras",                                   // REVIEW WITH A NATIVE SPEAKER
+          cdMins: "Minuto",                                  // REVIEW WITH A NATIVE SPEAKER
+          cdSecs: "Segundo",                                 // REVIEW WITH A NATIVE SPEAKER
+          cdToday: "Karon na ang adlaw!",                    // REVIEW WITH A NATIVE SPEAKER
+          cdPost: "Salamat sa pagsaulog uban kanamo",        // REVIEW WITH A NATIVE SPEAKER
+          albumBtn: "Tan-awa ang among photo album",         // REVIEW WITH A NATIVE SPEAKER
+          invEyebrow: "Ang Imbitasyon",                      // REVIEW WITH A NATIVE SPEAKER
+          invTitle: "Uban sa among mga pamilya",             // REVIEW WITH A NATIVE SPEAKER
+          dear: "Minahal namong {name},",                    // REVIEW WITH A NATIVE SPEAKER
+          invMessage: "Uban sa among mga pamilya, malipayon namo kamong gidapit sa pagsaulog sa among panaghiusa sa Balaang Kaminyoon.", // REVIEW WITH A NATIVE SPEAKER
+          parentsGroom: "Mga Ginikanan sa Pamanhonon",       // REVIEW WITH A NATIVE SPEAKER
+          parentsBride: "Mga Ginikanan sa Pangasaw-onon",    // REVIEW WITH A NATIVE SPEAKER
+          storyEyebrow: "Among Istorya sa Gugma",            // REVIEW WITH A NATIVE SPEAKER
+          storyTitle: "Giunsa namo pag-abot dinhi",          // REVIEW WITH A NATIVE SPEAKER
+          progEyebrow: "Programa sa Kasal",                  // REVIEW WITH A NATIVE SPEAKER
+          progTitle: "Ang adlaw, matag oras",                // REVIEW WITH A NATIVE SPEAKER
+          icsReady: "Andam na ang calendar file",            // REVIEW WITH A NATIVE SPEAKER
+          venEyebrow: "Mga Lugar",                           // REVIEW WITH A NATIVE SPEAKER
+          venTitle: "Asa mi makit-an",                       // REVIEW WITH A NATIVE SPEAKER
+          directions: "Direksyon",                           // REVIEW WITH A NATIVE SPEAKER
+          entEyebrow: "Entourage",                           // REVIEW WITH A NATIVE SPEAKER
+          entTitle: "Ang mga tawo sa among kiliran",         // REVIEW WITH A NATIVE SPEAKER
+          dressEyebrow: "Sinul-ob",                          // REVIEW WITH A NATIVE SPEAKER
+          dressTitle: "Peach ug cream",                      // REVIEW WITH A NATIVE SPEAKER
+          dressText: "Ang among motif kay peach ug cream. Gihangyo ang mga bisita nga magsul-ob og peach, blush, o neutral nga kolor.", // REVIEW WITH A NATIVE SPEAKER
+          attire: "Semi-formal nga sinul-ob; palihug ayaw pagsul-ob og puti", // REVIEW WITH A NATIVE SPEAKER
+          avoidWhite: "Ayaw og puti",                        // REVIEW WITH A NATIVE SPEAKER
+          giftEyebrow: "Giya sa Regalo",                     // REVIEW WITH A NATIVE SPEAKER
+          giftTitle: "Ang inyong presensya ang labing dakong regalo", // REVIEW WITH A NATIVE SPEAKER
+          giftLead: "Apan kung gusto ninyo kami panalanginan samtang magsugod mi sa among bag-ong kinabuhi, ang regalong kwarta among kinasingkasing nga pasalamatan.", // REVIEW WITH A NATIVE SPEAKER
+          giftShow: "Ipakita ang detalye",                   // REVIEW WITH A NATIVE SPEAKER
+          giftHide: "Itago ang detalye",                     // REVIEW WITH A NATIVE SPEAKER
+          galEyebrow: "Mga Litrato sa Prenup",               // REVIEW WITH A NATIVE SPEAKER
+          galTitle: "Pipila sa among mga paborito",          // REVIEW WITH A NATIVE SPEAKER
+          faqEyebrow: "Pangutana",                           // REVIEW WITH A NATIVE SPEAKER
+          faqTitle: "Maayong mahibal-an",                    // REVIEW WITH A NATIVE SPEAKER
+          rsvpEyebrow: "RSVP",                               // REVIEW WITH A NATIVE SPEAKER
+          rsvpTitle: "Mosaulog ba ka uban kanamo?",          // REVIEW WITH A NATIVE SPEAKER
+          rsvpNote: "Palihug pagtubag sa dili pa molapas ang {deadline}.", // REVIEW WITH A NATIVE SPEAKER
+          rsvpEditNote: "Gusto ba nimo usbon ang imong tubag? Ipadala pag-usab ang form gamit ang samang pangalan ug samang mobile number, ug among i-update kini.", // REVIEW WITH A NATIVE SPEAKER
+          lblName: "Tibuok nga pangalan",                    // REVIEW WITH A NATIVE SPEAKER
+          lblMobile: "Mobile number",                        // REVIEW WITH A NATIVE SPEAKER
+          lblAttend: "Motambong ka ba?",                     // REVIEW WITH A NATIVE SPEAKER
+          optYes: "Malipayong motambong",                    // REVIEW WITH A NATIVE SPEAKER
+          optNo: "Dili makatambong",                         // REVIEW WITH A NATIVE SPEAKER
+          lblSeats: "Lingkoranan nga gireserba para nimo",   // REVIEW WITH A NATIVE SPEAKER
+          lblSeatOne: "Lingkoranan nga gireserba para nimo: 1", // REVIEW WITH A NATIVE SPEAKER
+          seatOne: "{n} ka lingkoranan",                     // REVIEW WITH A NATIVE SPEAKER
+          seatMany: "{n} ka lingkoranan",                    // REVIEW WITH A NATIVE SPEAKER
+          lblDiet: "Pagkaon nga dili pwede o alerdyi (opsyonal)", // REVIEW WITH A NATIVE SPEAKER
+          phDiet: "Wala",                                    // REVIEW WITH A NATIVE SPEAKER
+          lblMsg: "Mensahe para sa magtiayon (opsyonal)",    // REVIEW WITH A NATIVE SPEAKER
+          btnSend: "Ipadala ang akong RSVP",                 // REVIEW WITH A NATIVE SPEAKER
+          btnSending: "Gipadala...",                         // REVIEW WITH A NATIVE SPEAKER
+          errName: "Palihug isulat ang imong tibuok nga pangalan.", // REVIEW WITH A NATIVE SPEAKER
+          errMobile: "Palihug isulat ang 11 ka numero nga mobile number nga nagsugod sa 09, sama sa 09171234567.", // REVIEW WITH A NATIVE SPEAKER
+          errDup: "Naa na mi RSVP ubos niining pangalan. Aron usbon kini, ipadala pag-usab gamit ang samang mobile number nga imong gigamit sa una. Kung wala na nimo kana nga numero, palihug kontaka ang among coordinator.", // REVIEW WITH A NATIVE SPEAKER
+          errGeneric: "Naay sayop. Palihug susiha ang imong detalye ug sulayi pag-usab.", // REVIEW WITH A NATIVE SPEAKER
+          errNetwork: "Wala nadala ang imong RSVP. Palihug susiha ang imong internet ug sulayi pag-usab.", // REVIEW WITH A NATIVE SPEAKER
+          closedMsg: "Sirado na ang RSVP. Kung naa kay pangutana, palihug kontaka ang among coordinator.", // REVIEW WITH A NATIVE SPEAKER
+          thanksTitle: "Salamat!",                           // REVIEW WITH A NATIVE SPEAKER
+          thanksUpdated: "Na-update na ang imong RSVP.",     // REVIEW WITH A NATIVE SPEAKER
+          thanksYes: "Dili na makahulat si {groom} ug {bride} nga makasaulog uban kanimo.", // REVIEW WITH A NATIVE SPEAKER
+          thanksNo: "Salamat sa pagpahibalo kanamo. Naa ka sa among kasingkasing sa among espesyal nga adlaw.", // REVIEW WITH A NATIVE SPEAKER
+          thanksArrive: "Palihug pag-abot sa simbahan sa dili pa ang 12:30 PM. Magkita ta sa {date}.", // REVIEW WITH A NATIVE SPEAKER
+          saveDate: "I-save ang petsa",                      // REVIEW WITH A NATIVE SPEAKER
+          gcalAdd: "Idugang sa Google Calendar",             // REVIEW WITH A NATIVE SPEAKER
+          icsAdd: "I-download ang .ics",                     // REVIEW WITH A NATIVE SPEAKER
+          wazeTitle: "Direksyon gamit ang Waze",             // REVIEW WITH A NATIVE SPEAKER
+          wazeTo: "Waze paingon sa {place}",                 // REVIEW WITH A NATIVE SPEAKER
+          hashEyebrow: "Ipaambit ang kalipay",               // REVIEW WITH A NATIVE SPEAKER
+          hashTitle: "Ipaambit ang inyong mga litrato gamit ang", // REVIEW WITH A NATIVE SPEAKER
+          hashCopy: "Kopyaha ang hashtag",                   // REVIEW WITH A NATIVE SPEAKER
+          hashCopied: "Nakopya na ang hashtag",              // REVIEW WITH A NATIVE SPEAKER
+          copyFail: "Pindota ug kupti aron makopya",         // REVIEW WITH A NATIVE SPEAKER
+          footerContact: "Kung naa kay pangutana, kontaka ang among wedding coordinator,", // REVIEW WITH A NATIVE SPEAKER
+          musicPlay: "Patugtoga ang musika",                 // REVIEW WITH A NATIVE SPEAKER
+          musicMute: "Hilona ang musika",                    // REVIEW WITH A NATIVE SPEAKER
+          musicFail: "Dili ma-play ang musika",              // REVIEW WITH A NATIVE SPEAKER
+          faq: [
+            ["Pwede ba ko magdala og kauban?", "Ang mga bisita lang nga nakapangalan sa imbitasyon, sumala sa gidaghanon sa lingkoranan nga gireserba."], // REVIEW WITH A NATIVE SPEAKER
+            ["Pwede ba ang mga bata?", "Ang mga bata lang nga nakapangalan sa imbitasyon ug kadtong apil sa entourage."], // REVIEW WITH A NATIVE SPEAKER
+            ["Unsang orasa ko moabot?", "Palihug pag-abot sa simbahan sa dili pa ang 12:30 PM."], // REVIEW WITH A NATIVE SPEAKER
+            ["Unplugged ba ang seremonya?", "Oo, palihug itago ang cellphone panahon sa seremonya; ang among mga photographer na ang bahala."], // REVIEW WITH A NATIVE SPEAKER
+            ["Unsa kalayo ang reception gikan sa simbahan?", "Ang reception naa sa Victoria, Tago; palihug paggahin og oras sa pagbiyahe gikan sa Tina, San Miguel. Gamita ang mga Direksyon nga button sa ibabaw."], // REVIEW WITH A NATIVE SPEAKER
+            ["Naa bay parkingan?", "Oo, naay parkingan sa duha ka lugar."] // REVIEW WITH A NATIVE SPEAKER
+          ]
+        }
       }
     };
 
@@ -2442,19 +2935,54 @@
       $$('[data-floral]').forEach(el => { el.outerHTML = corner(el.dataset.floral); });
       $$('[data-divider]').forEach(el => { el.innerHTML = `<svg viewBox="-24 -24 48 48" aria-hidden="true">${leaf(-6, 4, 200, .35, .8)}${leaf(6, 4, -20, .35, .8)}${fl('ranunculus', 0, -2, .8, 0)}</svg>`; });
 
+      /* ---------- clock. For testing only: add ?now=2026-12-19T09:00 to the address to make
+                    the page act as if it were that date (countdown, RSVP closing, post-wedding
+                    mode). The Google script always uses the real time. ---------- */
+      const nowOffset = (() => { const p = params.get('now'); if (!p) return 0; const t = new Date(p).getTime(); return isNaN(t) ? 0 : t - Date.now(); })();
+      const now = () => Date.now() + nowOffset;
+
+      /* ---------- language (English / Bisaya). Text lives in DATA.i18n. ---------- */
+      const I = DATA.i18n, LANGS = ['en', 'ceb'];
+      let lang = store.get('lang'); if (!LANGS.includes(lang)) lang = LANGS.includes(I.default) ? I.default : 'en';
+      // English values that already live elsewhere in DATA
+      const DEF = { dateLong: E.dateLong, deadline: DATA.rsvp.deadlineText, dressText: DATA.dress.text };
+      /* T('key', {name: 'Ana'}) returns plain text (escape it before putting it in HTML). */
+      function T(key, vars) {
+        const pick = o => (o && o[key] != null ? o[key] : null);
+        let s = pick(I[lang]); if (s == null) s = pick(I.en); if (s == null) s = DEF[key]; if (s == null) s = key;
+        if (vars) s = String(s).replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? vars[k] : m));
+        return s;
+      }
+      const faqList = () => (lang !== 'en' && I[lang] && Array.isArray(I[lang].faq) ? I[lang].faq : DATA.faq);
+
+      /* ---------- photos: WebP <picture> with a JPG fallback (sizes from DATA.photoSizes).
+                    o.sizes tells the browser how wide the photo shows, so phones get the small file. ---------- */
+      function pic(src, alt, o = {}) {
+        const info = DATA.photoSizes && DATA.photoSizes[src], base = esc(String(src).replace(/\.jpe?g$/i, ''));
+        const attrs = (o.cls ? ` class="${esc(o.cls)}"` : '') + ` alt="${esc(alt)}"` + (o.lazy ? ' loading="lazy"' : '') +
+          (o.priority ? ' fetchpriority="high"' : ' decoding="async"') + (o.pos ? ` style="object-position:${esc(o.pos)}"` : '');
+        if (!info) return `<img src="${esc(src)}"${attrs}>`;
+        const sizes = esc(o.sizes || '100vw');
+        const webp = info.webp.map(w => `${base}-${w}.webp ${w}w`).join(', ');
+        const jpg = (info.small ? `${base}-${info.small}.jpg ${info.small}w, ` : '') + `${esc(src)} ${info.w}w`;
+        return `<picture><source type="image/webp" srcset="${webp}" sizes="${sizes}"><img src="${esc(src)}" srcset="${jpg}" sizes="${sizes}" width="${info.w}" height="${info.h}"${attrs}></picture>`;
+      }
+
+      /* ---------- personal invite link: ?to=Guest%20Name&seats=N ---------- */
+      const guestName = (params.get('to') || '').replace(/[\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80);
+
       /* ---------- names, hero, invitation ---------- */
       document.title = `${C.groom} & ${C.bride} | December 18, 2026`;
       $('#heroNames').innerHTML = `${esc(C.groom)}<span class="amp">&amp;</span>${esc(C.bride)}`;
-      $('#heroDate').textContent = E.dateLong;
       $('#heroSub').textContent = `${DATA.ceremony.place} · ${DATA.ceremony.address.split(',')[0]}`;
-      const hi = $('#heroImg'); hi.src = DATA.heroPhoto.src; hi.alt = DATA.heroPhoto.alt; hi.style.objectPosition = DATA.heroPhoto.pos || '';
-      const ii = $('#invImg'); ii.src = DATA.invitePhoto.src; ii.alt = DATA.invitePhoto.alt;
+      $('#heroPic').innerHTML = pic(DATA.heroPhoto.src, DATA.heroPhoto.alt, { cls: 'hero-img', sizes: '100vw', priority: true, pos: DATA.heroPhoto.pos });
+      // the arch is portrait, so a landscape photo is shown about twice as wide as the arch
+      $('#invPic').innerHTML = pic(DATA.invitePhoto.src, DATA.invitePhoto.alt, { lazy: true, sizes: '(min-width: 25rem) 34rem, 140vw' });
       const pc = (title, names) => `<div class="pcard"><h3>${esc(title)}</h3>${names.map(n => `<p>${esc(n)}</p>`).join('')}</div>`;
-      $('#parents').innerHTML = pc('Parents of the Groom', ENT.parentsGroom) + pc('Parents of the Bride', ENT.parentsBride);
 
       /* ---------- love story ---------- */
       $('#timeline').innerHTML = DATA.story.map(s => {
-        const media = s.photo ? `<div class="photo"><img src="${esc(s.photo)}" alt="${esc(s.alt)}" loading="lazy"></div>`
+        const media = s.photo ? `<div class="photo">${pic(s.photo, s.alt, { lazy: true, sizes: '(min-width: 48rem) 28rem, 92vw' })}</div>`
           : `<div class="ph" role="img" aria-label="Photo placeholder: ${esc(s.title)}">${ico('i-cam')}<span>Photo placeholder</span></div>`;
         return `<article class="tl-item reveal"><div class="tl-text"><p class="tl-when">${esc(s.when)}</p><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>${media}</article>`;
       }).join('');
@@ -2465,9 +2993,11 @@
       /* ---------- venues ---------- */
       const mapEmbed = q => 'https://maps.google.com/maps?q=' + encodeURIComponent(q) + '&z=15&output=embed';
       const mapDir = q => 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(q);
+      // Waze: exact coordinates when DATA gives them, otherwise a place search
+      const wazeUrl = v => 'https://waze.com/ul?' + (v.wazeLL ? 'll=' + encodeURIComponent(v.wazeLL) : 'q=' + encodeURIComponent(v.mapQuery)) + '&navigate=yes';
       const venue = v => `<article class="vcard reveal"><iframe title="Map of ${esc(v.place)}" src="${mapEmbed(v.mapQuery)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
 <div class="body"><p class="vtag">${esc(v.tag)} · ${esc(v.time)}</p><h3>${esc(v.place)}</h3><p>${esc(v.address)}</p>
-<a class="btn sm" href="${mapDir(v.mapQuery)}" target="_blank" rel="noopener">${ico('i-pin')} Get Directions</a></div></article>`;
+<a class="btn sm" href="${mapDir(v.mapQuery)}" target="_blank" rel="noopener">${ico('i-pin')} <span data-i18n="directions">Get Directions</span></a></div></article>`;
       $('#venueList').innerHTML = venue(DATA.ceremony) + venue(DATA.reception);
 
       /* ---------- entourage ---------- */
@@ -2495,44 +3025,50 @@
         b.textContent = open ? 'Show fewer' : 'View all Principal Sponsors';
       });
 
-      /* ---------- dress code, gifts, faq, hashtag, coordinator ---------- */
-      $('#dressText').textContent = DATA.dress.text;
+      /* ---------- dress code, gifts, hashtag, coordinator ---------- */
       $('#swatches').innerHTML = DATA.dress.swatches.map(s => `<div class="sw"><i style="background:${esc(s.hex)}"></i><span>${esc(s.name)}</span></div>`).join('') +
-        `<div class="sw no"><i></i><span>Avoid white</span></div>`;
+        `<div class="sw no"><i></i><span data-i18n="avoidWhite">Avoid white</span></div>`;
       $('#giftBox').innerHTML = `<div class="box"><span class="edit-flag">DETAILS</span><dl style="margin:0">${DATA.gifts.map(g => `<dt>${esc(g.label)}</dt><dd>${esc(g.value)}</dd>`).join('')}</dl></div>`;
+      const giftLabel = () => { $('#giftBtn').textContent = T($('#giftBox').hidden ? 'giftShow' : 'giftHide'); };
       $('#giftBtn').addEventListener('click', e => {
-        const b = e.currentTarget, open = $('#giftBox').hidden;
-        $('#giftBox').hidden = !open; b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'Hide details' : 'Show details';
+        const open = $('#giftBox').hidden;
+        $('#giftBox').hidden = !open; e.currentTarget.setAttribute('aria-expanded', String(open)); giftLabel();
       });
-      $('#faqList').innerHTML = DATA.faq.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
       $('#hashText').textContent = C.hashtag;
-      $('#hashBtn').addEventListener('click', async () => toast(await copyText(C.hashtag) ? 'Hashtag copied' : 'Press and hold to copy'));
+      $('#hashBtn').addEventListener('click', async () => toast(await copyText(C.hashtag) ? T('hashCopied') : T('copyFail')));
       const cm = DATA.coordinator, digits = cm.mobile.replace(/\D/g, '');
       $('#coord').innerHTML = esc(cm.name) + ' · ' + (/^09\d{9}$/.test(digits) ? `<a href="tel:+63${digits.slice(1)}">${esc(cm.mobile)}</a>` : esc(cm.mobile));
 
-      /* ---------- countdown ---------- */
-      const target = new Date(E.startISO).getTime();
+      /* ---------- countdown, then "Thank you" after the wedding (DATA.event.endISO) ---------- */
+      const target = new Date(E.startISO).getTime(), endT = new Date(E.endISO).getTime();
+      const albumOk = /^https:\/\//i.test(DATA.albumUrl || '');   // only real web links become a button
+      let tickTimer = null;
       function tick() {
-        const box = $('#count'), diff = target - Date.now();
+        const box = $('#count'), t = now();
         if (isNaN(target)) { box.hidden = true; return; }
-        if (diff <= 0) {
-          box.className = 'count done';
-          box.innerHTML = `<div>${diff > -864e5 ? 'Today is the day!' : 'We said I do!'}</div>`; return;
+        if (!isNaN(endT) && t > endT) {
+          box.className = 'count done'; box.removeAttribute('role'); box.removeAttribute('aria-label');
+          box.innerHTML = `<div>${esc(T('cdPost'))}</div>` +
+            (albumOk ? `<p class="album"><a class="btn" href="${esc(DATA.albumUrl)}" target="_blank" rel="noopener">${ico('i-cam')} ${esc(T('albumBtn'))}</a></p>` : '');
+          clearInterval(tickTimer); tickTimer = null; return;
         }
+        const diff = target - t;
+        if (diff <= 0) { box.className = 'count done'; box.innerHTML = `<div>${esc(T('cdToday'))}</div>`; return; }
         const d = Math.floor(diff / 864e5), h = Math.floor(diff % 864e5 / 36e5), m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1e3);
-        box.innerHTML = [[d, 'Days'], [h, 'Hours'], [m, 'Mins'], [s, 'Secs']].map(x => `<div><b>${x[0]}</b><small>${x[1]}</small></div>`).join('');
+        box.innerHTML = [[d, 'cdDays'], [h, 'cdHours'], [m, 'cdMins'], [s, 'cdSecs']].map(x => `<div><b>${x[0]}</b><small>${esc(T(x[1]))}</small></div>`).join('');
       }
-      tick(); setInterval(tick, 1000);
+      tickTimer = setInterval(tick, 1000);
 
-      /* ---------- add to calendar ---------- */
+      /* ---------- add to calendar (program section and thank-you screen) ---------- */
       const start = new Date(E.startISO), end = new Date(E.endISO);
       const stamp = d => d.toISOString().replace(/[-:]|\.\d{3}/g, '');
       const calTitle = `Wedding of ${C.groom} & ${C.bride}`;
       const calLoc = `${DATA.ceremony.place}, ${DATA.ceremony.address}`;
       const calDesc = `Ceremony ${DATA.ceremony.time} at ${DATA.ceremony.place}. Reception ${DATA.reception.time} at ${DATA.reception.place}, ${DATA.reception.address}. Please arrive by 12:30 PM.`;
-      $('#gcalBtn').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(calTitle) + '&dates=' + stamp(start) + '/' + stamp(end) + '&details=' + encodeURIComponent(calDesc) + '&location=' + encodeURIComponent(calLoc);
+      const gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(calTitle) + '&dates=' + stamp(start) + '/' + stamp(end) + '&details=' + encodeURIComponent(calDesc) + '&location=' + encodeURIComponent(calLoc);
+      $('#gcalBtn').href = gcalUrl;
       const icsEsc = s => String(s).replace(/\\/g, '\\\\').replace(/[,;]/g, m => '\\' + m).replace(/\n/g, '\\n');
-      $('#icsBtn').addEventListener('click', () => {
+      function downloadIcs() {
         const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Wedding Invitation//EN', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
           'UID:' + stamp(start) + '@wedding-invitation', 'DTSTAMP:' + stamp(new Date()), 'DTSTART:' + stamp(start), 'DTEND:' + stamp(end),
           'SUMMARY:' + icsEsc(calTitle), 'LOCATION:' + icsEsc(calLoc), 'DESCRIPTION:' + icsEsc(calDesc),
@@ -2541,13 +3077,16 @@
         a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
         a.download = 'wedding-12-18-2026.ics'; document.body.appendChild(a); a.click(); a.remove();
         setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-        toast('Calendar file ready');
-      });
+        toast(T('icsReady'));
+      }
+      $('#icsBtn').addEventListener('click', downloadIcs);
 
       /* ---------- gallery + lightbox ---------- */
       const G = DATA.gallery;
       const tile = (g, i, big) => g.src
-        ? `<img src="${esc(g.src)}" alt="${esc(g.alt)}" ${big ? '' : `loading="lazy" style="object-position:${esc(g.pos || '50% 50%')}"`}>`
+        ? (big ? pic(g.src, g.alt, { sizes: '100vw' })
+          // tiles are portrait, so landscape photos show wider than the tile itself
+          : pic(g.src, g.alt, { lazy: true, pos: g.pos || '50% 50%', sizes: '(min-width: 40rem) 30rem, 95vw' }))
         : `<div class="ph" role="img" aria-label="${esc(g.alt)}">${ico('i-cam')}<span>${big ? esc(g.alt) : 'Photo ' + (i + 1)}</span></div>`;
       $('#gal').innerHTML = G.map((g, i) => `<button type="button" data-i="${i}" aria-label="Open photo ${i + 1} of ${G.length}">${tile(g, i)}</button>`).join('');
       let lbIndex = 0, lbOpener = null;
@@ -2573,32 +3112,56 @@
       lb.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
       lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) lbShow(lbIndex + (dx < 0 ? 1 : -1)); }, { passive: true });
 
-      /* ---------- music (off until the guest taps play) ---------- */
-      (function () {
-        const src = DATA.music.src; if (!src) return;
+      /* ---------- music: starts when the guest taps "Tap to open" (a guest action, so phones
+                    allow it). The corner button mutes / plays; the choice is kept in
+                    sessionStorage ("music" = "on" / "off") until the tab is closed. ---------- */
+      const music = (function () {
+        const src = DATA.music.src;
+        if (!src) return { start() { }, label() { } };
         const audio = new Audio(src); audio.loop = true; audio.preload = 'none';
         const btn = $('#musicBtn'); btn.hidden = false;
-        const set = on => { btn.setAttribute('aria-pressed', String(on)); btn.setAttribute('aria-label', on ? 'Mute music' : 'Play music'); $('#musicIco').setAttribute('href', on ? '#i-mute' : '#i-music'); };
+        const set = on => { btn.setAttribute('aria-pressed', String(on)); btn.setAttribute('aria-label', T(on ? 'musicMute' : 'musicPlay')); $('#musicIco').setAttribute('href', on ? '#i-mute' : '#i-music'); };
+        function play(loud) {
+          set(true);
+          const p = audio.play();
+          if (p && p.catch) p.catch(() => { set(false); if (loud) toast(T('musicFail')); });
+        }
         btn.addEventListener('click', () => {
-          if (audio.paused) audio.play().then(() => set(true)).catch(() => toast('Music could not play'));
-          else { audio.pause(); set(false); }
+          if (audio.paused) { sess.set('music', 'on'); play(true); }
+          else { audio.pause(); sess.set('music', 'off'); set(false); }
         });
+        // Page reloaded with music on and no envelope this time: resume on the guest's next tap or key.
+        if (sess.get('music') === 'on' && sess.get('introSeen') && !params.has('intro')) {
+          const resume = e => {
+            if (e.target.closest && e.target.closest('#musicBtn')) return;   // the button handles itself
+            document.removeEventListener('click', resume, true); document.removeEventListener('keydown', resume, true);
+            if (audio.paused && sess.get('music') === 'on') play(false);
+          };
+          document.addEventListener('click', resume, true); document.addEventListener('keydown', resume, true);
+        }
+        return {
+          start() { if (sess.get('music') !== 'off') { sess.set('music', 'on'); play(false); } },
+          label() { set(!audio.paused); }
+        };
       })();
 
       /* ---------- RSVP ---------- */
       const R = DATA.rsvp;
       const deadline = new Date(R.deadlineISO).getTime();
-      const closed = Date.now() > deadline;
       let maxSeats = parseInt(params.get('seats'), 10) || R.defaultMaxSeats; maxSeats = Math.min(10, Math.max(1, maxSeats));
-      $('#rsvpNote').textContent = `Kindly reply on or before ${R.deadlineText}.`;
       const form = $('#rsvpForm');
-      $('#fseats').innerHTML = Array.from({ length: maxSeats }, (_, i) => `<option value="${i + 1}">${i + 1} ${i ? 'seats' : 'seat'}</option>`).join('');
-      $('#fseats').value = String(maxSeats);
-      if (maxSeats === 1) $('#seatRow').querySelector('label').textContent = 'Seat reserved for you: 1';
-      if (maxSeats === 1) $('#fseats').hidden = true;
-      if (closed) { $('#formCard').hidden = true; $('#closedMsg').hidden = false; }
+      if (guestName) form.name.value = guestName;   // prefilled from the personal link; still editable
+      function renderSeats() {
+        const sel = $('#fseats'), cur = sel.value || String(maxSeats);
+        sel.innerHTML = Array.from({ length: maxSeats }, (_, i) => `<option value="${i + 1}">${esc(T(i ? 'seatMany' : 'seatOne', { n: i + 1 }))}</option>`).join('');
+        sel.value = cur;
+        $('#lblSeats').textContent = T(maxSeats === 1 ? 'lblSeatOne' : 'lblSeats');
+        sel.hidden = maxSeats === 1;
+      }
+      function showClosed() { $('#formCard').hidden = true; $('#rsvpEditNote').hidden = true; $('#closedMsg').hidden = false; }
+      if (now() > deadline) showClosed();
 
-      const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+      const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
       const showErr = (id, msg, input) => { const p = $('#' + id); p.textContent = msg; p.hidden = !msg; if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false'); };
       function toggleAttend() { const yes = form.attend.value === 'yes'; $('#seatRow').hidden = !yes; $('#dietRow').hidden = !yes; }
       form.addEventListener('change', toggleAttend); toggleAttend();
@@ -2606,54 +3169,102 @@
       function validate() {
         let ok = true, first = null;
         const name = form.name.value.trim().replace(/\s+/g, ' ');
-        if (name.length < 2 || !/[A-Za-zÀ-ɏ]/.test(name)) { showErr('e-name', 'Please enter your full name.', form.name); ok = false; first = first || form.name; } else showErr('e-name', '', form.name);
+        if (name.length < 2 || !/[A-Za-zÀ-ɏ]/.test(name)) { showErr('e-name', T('errName'), form.name); ok = false; first = first || form.name; } else showErr('e-name', '', form.name);
         const mobile = form.mobile.value.replace(/[\s-]/g, '');
-        if (!/^09\d{9}$/.test(mobile)) { showErr('e-mobile', 'Please enter an 11-digit mobile number starting with 09, like 09171234567.', form.mobile); ok = false; first = first || form.mobile; } else showErr('e-mobile', '', form.mobile);
+        if (!/^09\d{9}$/.test(mobile)) { showErr('e-mobile', T('errMobile'), form.mobile); ok = false; first = first || form.mobile; } else showErr('e-mobile', '', form.mobile);
         if (first) first.focus();
         return ok ? { name, mobile } : null;
       }
 
-      function thanks(attending, devMode) {
-        const yes = attending === 'yes';
+      /* thank-you screen; kept in lastThanks so it can be redrawn when the language changes */
+      let lastThanks = null;
+      function renderThanks() {
+        if (!lastThanks) return;
+        const { attending, devMode, updated } = lastThanks, yes = attending === 'yes';
+        const waze = [DATA.ceremony, DATA.reception].map(v =>
+          `<a class="btn sm ghost" href="${esc(wazeUrl(v))}" target="_blank" rel="noopener">${ico('i-pin')} ${esc(T('wazeTo', { place: v.place }))}</a>`).join('');
         $('#thanks').innerHTML = `<svg class="heart" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-heart"/></svg>
-    <h3>Thank you!</h3>
-    <p style="font:italic 500 1.2rem/1.6 var(--serif)">${yes ? `${esc(C.groom)} &amp; ${esc(C.bride)} can't wait to celebrate with you.` : `Thank you for letting us know. You will be in our hearts on our special day.`}</p>
-    ${yes ? `<p class="note">Please arrive at the church by 12:30 PM. See you on ${esc(E.dateLong)}.</p>` : ''}
+    <h3 tabindex="-1">${esc(T('thanksTitle'))}</h3>
+    ${updated ? `<p class="note"><b>${esc(T('thanksUpdated'))}</b></p>` : ''}
+    <p style="font:italic 500 1.2rem/1.6 var(--serif)">${esc(yes ? T('thanksYes', { groom: C.groom, bride: C.bride }) : T('thanksNo'))}</p>
+    ${yes ? `<p class="note">${esc(T('thanksArrive', { date: T('dateLong') }))}</p>
+    <p class="acts-title">${esc(T('saveDate'))}</p>
+    <div class="acts"><a class="btn sm" href="${esc(gcalUrl)}" target="_blank" rel="noopener">${ico('i-cal')} ${esc(T('gcalAdd'))}</a><button class="btn sm ghost" type="button" data-ics>${ico('i-cal')} ${esc(T('icsAdd'))}</button></div>
+    <p class="acts-title">${esc(T('wazeTitle'))}</p>
+    <div class="acts">${waze}</div>` : ''}
     ${devMode ? '<div class="devnote"><b>Test mode:</b> your reply was not saved because the Google Sheet link is not set yet. Paste the web app URL into <code>DATA.rsvp.scriptUrl</code> (README, step 2).</div>' : ''}`;
-        form.hidden = true; $('#thanks').hidden = false; $('#formCard').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      }
+      $('#thanks').addEventListener('click', e => { if (e.target.closest('[data-ics]')) downloadIcs(); });
+      function showThanks(attending, devMode, updated) {
+        lastThanks = { attending, devMode, updated }; renderThanks();
+        form.hidden = true; $('#thanks').hidden = false;
+        $('#formCard').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+        $('#thanks h3').focus({ preventScroll: true });
       }
 
       form.addEventListener('submit', async e => {
         e.preventDefault();
         showErr('e-form', '');
-        if (Date.now() > deadline) { $('#formCard').hidden = true; $('#closedMsg').hidden = false; return; }
+        if (now() > deadline) { showClosed(); return; }
         const v = validate(); if (!v) return;
         const attending = form.attend.value;
-        const seen = safe(() => JSON.parse(store.get('rsvpNames') || '[]'), []);
-        if (seen.includes(norm(v.name))) { showErr('e-form', 'We already received an RSVP for this name from this device. Thank you! For changes, please contact our coordinator.'); return; }
         const payload = { action: 'rsvp', name: v.name, mobile: v.mobile, attending, seats: attending === 'yes' ? +form.seats.value : 0, diet: attending === 'yes' ? form.diet.value.trim() : '', message: form.message.value.trim(), website: form.website.value };
-        const btn = $('#sendBtn'); btn.disabled = true; btn.textContent = 'Sending...';
+        const btn = $('#sendBtn'); btn.disabled = true; btn.textContent = T('btnSending');
         try {
-          if (!R.scriptUrl) { await new Promise(r => setTimeout(r, 600)); thanks(attending, true); return; }
+          if (!R.scriptUrl) { await new Promise(r => setTimeout(r, 600)); showThanks(attending, true, false); return; }
           const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 20000);
           const res = await fetch(R.scriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), signal: ctl.signal });
           clearTimeout(to);
           const out = await res.json();
-          if (out.ok) { store.set('rsvpNames', JSON.stringify(seen.concat(norm(v.name)))); thanks(attending, false); }
-          else if (out.error === 'duplicate') showErr('e-form', 'We already have an RSVP under this name. Thank you! For changes, please contact our coordinator.');
-          else if (out.error === 'closed') { $('#formCard').hidden = true; $('#closedMsg').hidden = false; }
-          else showErr('e-form', 'Something went wrong. Please check your details and try again.');
+          if (out.ok) showThanks(attending, false, !!out.updated);
+          else if (out.error === 'duplicate') showErr('e-form', T('errDup'));   // same name, different mobile
+          else if (out.error === 'closed') showClosed();
+          else showErr('e-form', T('errGeneric'));
         } catch (err) {
-          showErr('e-form', 'We could not send your RSVP. Please check your internet connection and try again.');
-        } finally { btn.disabled = false; btn.textContent = 'Send my RSVP'; }
+          showErr('e-form', T('errNetwork'));
+        } finally { btn.disabled = false; btn.textContent = T('btnSend'); }
       });
+
+      /* ---------- apply the chosen language to everything on the page ---------- */
+      function renderText() {
+        document.documentElement.lang = lang;
+        $$('[data-i18n]').forEach(el => { el.textContent = T(el.dataset.i18n); });
+        $$('[data-i18n-ph]').forEach(el => { el.placeholder = T(el.dataset.i18nPh); });
+        $$('#langBox button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+        $('#heroDate').textContent = T('dateLong');
+        const dear = $('#dear'); dear.hidden = !guestName; dear.textContent = guestName ? T('dear', { name: guestName }) : '';
+        $('#parents').innerHTML = pc(T('parentsGroom'), ENT.parentsGroom) + pc(T('parentsBride'), ENT.parentsBride);
+        $('#dressText').textContent = T('dressText');
+        $('#faqList').innerHTML = faqList().map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
+        $('#rsvpNote').textContent = T('rsvpNote', { deadline: T('deadline') });
+        if (!$('#sendBtn').disabled) $('#sendBtn').textContent = T('btnSend');
+        giftLabel(); renderSeats(); renderThanks(); music.label(); tick();
+      }
+      $$('#langBox button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; store.set('lang', lang); renderText(); }));
 
       /* ---------- ADMIN (?admin) ---------- */
       function initAdmin() {
-        $('#site').hidden = true; $('#intro').remove(); $('#admin').hidden = false; document.title = 'RSVP Admin';
-        const A = { rows: [] };
+        $('#site').hidden = true; $('#intro').remove(); $('#langBox').remove(); $('#admin').hidden = false; document.title = 'RSVP Admin';
+        document.documentElement.lang = 'en';
+        const A = { rows: [], shown: [], guests: [], pending: [] };
         const post = body => fetch(R.scriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).then(r => r.json());
         const isYes = r => /^joyfully/i.test(r.attending);
+
+        /* --- tabs (arrow keys move between them) --- */
+        const tabs = [$('#tabReplies'), $('#tabLinks')];
+        function selectTab(t, focus) {
+          tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; $('#' + x.getAttribute('aria-controls')).hidden = !on; });
+          if (focus) t.focus();
+        }
+        tabs.forEach((t, i) => {
+          t.addEventListener('click', () => selectTab(t));
+          t.addEventListener('keydown', e => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            e.preventDefault(); selectTab(tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length], true);
+          });
+        });
+
+        /* --- replies tab --- */
         function render() {
           const q = $('#aq').value.trim().toLowerCase(), f = $('#af').value;
           const rows = A.rows.filter(r => (f === 'all' || (f === 'yes') === isYes(r)) && (!q || [r.name, r.mobile, r.message, r.diet].join(' ').toLowerCase().includes(q)));
@@ -2663,7 +3274,8 @@
           $('#stSeats').textContent = A.rows.filter(isYes).reduce((n, r) => n + (+r.seats || 0), 0);
           $('#stAll').textContent = A.rows.length;
           $('#aCount').textContent = `Showing ${rows.length} of ${A.rows.length} replies.`;
-          $('#aRows').innerHTML = rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td><span class="pill ${isYes(r) ? 'yes' : 'no'}">${isYes(r) ? 'Attending' : 'Declined'}</span></td><td>${esc(r.seats)}</td><td>${esc(r.diet)}</td><td class="msg">${esc(r.message)}</td><td>${esc(r.timestamp)}</td></tr>`).join('') || '<tr><td colspan="8">No replies match.</td></tr>';
+          $('#aRows').innerHTML = rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(r.name)}</td><td>${esc(r.mobile)}</td><td><span class="pill ${isYes(r) ? 'yes' : 'no'}">${isYes(r) ? 'Attending' : 'Declined'}</span></td><td>${esc(r.seats)}</td><td>${esc(r.diet)}</td><td class="msg">${esc(r.message)}</td><td>${esc(r.timestamp)}${r.updated ? `<br><small>edited ${esc(r.updated)}</small>` : ''}</td></tr>`).join('') || '<tr><td colspan="8">No replies match.</td></tr>';
+          renderPending();
         }
         async function load(pw) {
           if (!R.scriptUrl) { showErr('aerr', 'The Google Sheet link is not set yet (DATA.rsvp.scriptUrl).'); return false; }
@@ -2684,12 +3296,85 @@
         /* CSV: guards against spreadsheet formulas; keeps the leading 0 of mobile numbers */
         const cell = (v, kind) => { v = String(v == null ? '' : v); if (kind === 'mobile' && /^\d{11}$/.test(v)) return `"=""${v}"""`; if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
         $('#aCsv').addEventListener('click', () => {
-          const head = ['Name', 'Mobile', 'Reply', 'Seats', 'Dietary', 'Message', 'Sent'];
-          const lines = [head.map(h => cell(h)).join(',')].concat((A.shown || []).map(r => [cell(r.name), cell(r.mobile, 'mobile'), cell(r.attending), cell(r.seats), cell(r.diet), cell(r.message), cell(r.timestamp)].join(',')));
+          const head = ['Name', 'Mobile', 'Reply', 'Seats', 'Dietary', 'Message', 'Sent', 'Edited'];
+          const lines = [head.map(h => cell(h)).join(',')].concat((A.shown || []).map(r => [cell(r.name), cell(r.mobile, 'mobile'), cell(r.attending), cell(r.seats), cell(r.diet), cell(r.message), cell(r.timestamp), cell(r.updated)].join(',')));
           const a = document.createElement('a');
           a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }));
           a.download = 'rsvp-list.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
         });
+
+        /* --- guest links tab --- */
+        // Links point at the address this admin page was opened from (or DATA.site.url when opened as a file).
+        const linkBase = /^https?:$/.test(location.protocol) ? location.origin + location.pathname.replace(/index\.html$/, '') : DATA.site.url;
+        const guestLink = g => linkBase + '?to=' + encodeURIComponent(g.name) + '&seats=' + g.seats;
+        const reminder = g => R.reminderText.replace(/\{(\w+)\}/g, (m, k) => ({ name: g.name, link: guestLink(g), deadline: R.deadlineText })[k] ?? m);
+        $('#glDefault').textContent = R.defaultMaxSeats + (R.defaultMaxSeats === 1 ? ' seat' : ' seats');
+
+        /* small CSV reader: handles "quoted, names", "" inside quotes, and , ; or tab between columns */
+        function parseCsv(text) {
+          const rows = []; let row = [], f = '', q = false;
+          text = String(text).replace(/^﻿/, '');
+          for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+            else if (c === '"') q = true;
+            else if (c === ',' || c === ';' || c === '\t') { row.push(f); f = ''; }
+            else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+            else f += c;
+          }
+          row.push(f); rows.push(row);
+          return rows;
+        }
+        function readGuests(text) {
+          const seen = new Set(), out = []; let dupes = 0;
+          parseCsv(text).forEach((r, i) => {
+            const name = String(r[0] || '').replace(/[\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80);
+            if (!name || (i === 0 && /^(name|guest|pangalan)/i.test(name))) return;   // blank line or header row
+            let seats = parseInt(String(r[1] || '').trim(), 10);
+            if (!(seats >= 1)) seats = R.defaultMaxSeats;
+            seats = Math.min(10, seats);
+            const k = norm(name); if (seen.has(k)) { dupes++; return; } seen.add(k);
+            out.push({ name, seats });
+          });
+          return { guests: out, dupes };
+        }
+        function makeLinks() {
+          const text = $('#glCsv').value; sess.set('guestCsv', text);
+          const { guests, dupes } = readGuests(text);
+          A.guests = guests;
+          $('#glRows').innerHTML = guests.map((g, i) => `<tr><td>${i + 1}</td><td>${esc(g.name)}</td><td>${g.seats}</td><td class="link">${esc(guestLink(g))}</td><td><button class="btn sm ghost" type="button" data-copy="${i}" aria-label="Copy link for ${esc(g.name)}">Copy</button></td></tr>`).join('')
+            || '<tr><td colspan="5">No guests found. Use one line per guest: name,seats</td></tr>';
+          $('#glCopyAll').disabled = !guests.length;
+          $('#glCount').textContent = guests.length ? `${guests.length} personal link${guests.length === 1 ? '' : 's'} ready.` + (dupes ? ` ${dupes} repeated name${dupes === 1 ? '' : 's'} skipped.` : '') : '';
+          renderPending();
+        }
+        /* "Not yet replied": guest names with no RSVP of the same name in the sheet */
+        function renderPending() {
+          if (!A.guests.length) { $('#nrRows').innerHTML = ''; $('#nrCopy').disabled = true; return; }
+          const replied = new Set(A.rows.map(r => norm(r.name)));
+          A.pending = A.guests.filter(g => !replied.has(norm(g.name)));
+          $('#nrCount').textContent = `${A.pending.length} of ${A.guests.length} guests have not replied yet (checked against ${A.rows.length} replies; press Refresh on the Replies tab for the latest).`;
+          $('#nrRows').innerHTML = A.pending.map((g, i) => `<tr><td>${i + 1}</td><td>${esc(g.name)}</td><td>${g.seats}</td><td><button class="btn sm ghost" type="button" data-rem="${i}" aria-label="Copy reminder message for ${esc(g.name)}">Copy reminder message</button></td></tr>`).join('')
+            || '<tr><td colspan="4">Everyone on the list has replied.</td></tr>';
+          $('#nrCopy').disabled = !A.pending.length;
+        }
+        const copied = async (text, what) => toast(await copyText(text) ? what + ' copied' : 'Could not copy; select the text and copy it');
+        $('#glMake').addEventListener('click', makeLinks);
+        $('#glFile').addEventListener('change', e => {
+          const f = e.target.files[0]; if (!f) return;
+          f.arrayBuffer().then(buf => {
+            let t = new TextDecoder('utf-8').decode(buf);
+            if (t.includes('�')) t = new TextDecoder('windows-1252').decode(buf);   // older Excel saves "Niña" this way
+            $('#glCsv').value = t; makeLinks();
+          });
+          e.target.value = '';
+        });
+        $('#glRows').addEventListener('click', e => { const b = e.target.closest('[data-copy]'); if (b) copied(guestLink(A.guests[+b.dataset.copy]), 'Link'); });
+        $('#glCopyAll').addEventListener('click', () => copied(A.guests.map(g => `${g.name}: ${guestLink(g)}`).join('\n'), 'All links'));
+        $('#nrRows').addEventListener('click', e => { const b = e.target.closest('[data-rem]'); if (b) copied(reminder(A.pending[+b.dataset.rem]), 'Reminder'); });
+        $('#nrCopy').addEventListener('click', () => copied(A.pending.map(reminder).join('\n\n'), 'All reminders'));
+        const savedCsv = sess.get('guestCsv'); if (savedCsv) { $('#glCsv').value = savedCsv; makeLinks(); }
+
         const saved = sess.get('adminPw'); if (saved) open(saved); else $('#apw').focus();
       }
 
@@ -2700,7 +3385,7 @@
         document.documentElement.classList.add('no-scroll');
         let finished = false;
         const done = () => { if (finished) return; finished = true; intro.classList.add('leaving'); document.documentElement.classList.remove('no-scroll'); sess.set('introSeen', '1'); setTimeout(() => intro.remove(), 700); };
-        $('#openBtn').addEventListener('click', () => { intro.classList.add('open'); $('#openBtn').disabled = true; setTimeout(done, reduced ? 150 : 1900); });
+        $('#openBtn').addEventListener('click', () => { music.start(); intro.classList.add('open'); $('#openBtn').disabled = true; setTimeout(done, reduced ? 150 : 1900); });
         $('#skipBtn').addEventListener('click', done);
         intro.addEventListener('keydown', e => { if (e.key === 'Escape') done(); });
         $('#openBtn').focus({ preventScroll: true });
@@ -2724,7 +3409,7 @@
         map.forEach((a, s) => spy.observe(s));
       }
 
-      if (isAdmin) initAdmin(); else { initIntro(); initScroll(); }
+      if (isAdmin) initAdmin(); else { renderText(); initIntro(); initScroll(); }
     })();
   </script>
 </body>

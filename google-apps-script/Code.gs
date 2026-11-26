@@ -19,7 +19,8 @@ const SHEET_NAME     = 'RSVPs';                     // tab name (created automat
 const MAX_SEATS      = 10;                          // hard upper limit per reply
 /* ======================================================= */
 
-const HEADERS = ['Timestamp', 'Name', 'Mobile', 'Attending', 'Seats', 'Dietary', 'Message'];
+// Column 8 "Updated" is filled when a guest edits their reply (same name + same mobile).
+const HEADERS = ['Timestamp', 'Name', 'Mobile', 'Attending', 'Seats', 'Dietary', 'Message', 'Updated'];
 
 /** Opening the web app URL in a browser just shows that it is alive. */
 function doGet() {
@@ -58,14 +59,29 @@ function handleRsvp_(b) {
     const sheet = getSheet_();
     const last = sheet.getLastRow();
     const key = norm_(name);
-    if (last > 1) {
-      const names = sheet.getRange(2, 2, last - 1, 1).getValues();
-      if (names.some(function (r) { return norm_(r[0]) === key; })) return json_({ ok: false, error: 'duplicate' });
-    }
     const stamp = Utilities.formatDate(new Date(), 'Asia/Manila', 'yyyy-MM-dd HH:mm:ss');
+    const diet = clean_(b.diet, 200), message = clean_(b.message, 500);
+
+    if (last > 1) {
+      // columns B (Name) and C (Mobile) of every existing reply
+      const rows = sheet.getRange(2, 2, last - 1, 2).getValues();
+      for (let i = 0; i < rows.length; i++) {
+        if (norm_(rows[i][0]) !== key) continue;
+        // Same name already in the sheet.
+        // Same mobile number too: the guest is changing their reply, so update that row.
+        // Different mobile: refuse, so nobody can overwrite someone else's reply.
+        if (mobile_(rows[i][1]) !== mobile) return json_({ ok: false, error: 'duplicate' });
+        const row = sheet.getRange(i + 2, 1, 1, HEADERS.length);
+        const original = String(row.getValues()[0][0]);       // keep the first "Timestamp"
+        row.setNumberFormat('@');                            // plain text, as for new replies
+        row.setValues([[original, name, mobile, attending, String(seats), diet, message, stamp]]);
+        return json_({ ok: true, updated: true });
+      }
+    }
+
     const range = sheet.getRange(last + 1, 1, 1, HEADERS.length);
     range.setNumberFormat('@');                              // plain text: nothing typed by a guest can run as a formula
-    range.setValues([[stamp, name, mobile, attending, String(seats), clean_(b.diet, 200), clean_(b.message, 500)]]);
+    range.setValues([[stamp, name, mobile, attending, String(seats), diet, message, '']]);
     return json_({ ok: true });
   } finally {
     lock.releaseLock();
@@ -86,7 +102,7 @@ function handleList_(b) {
     ok: true,
     rows: rows.map(function (r) {
       return { timestamp: String(r[0]), name: String(r[1]), mobile: String(r[2]), attending: String(r[3]),
-               seats: String(r[4]), diet: String(r[5]), message: String(r[6]) };
+               seats: String(r[4]), diet: String(r[5]), message: String(r[6]), updated: String(r[7] || '') };
     })
   });
 }
@@ -99,8 +115,16 @@ function getSheet_() {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
     sheet.setFrozenRows(1);
+  } else if (sheet.getLastColumn() < HEADERS.length) {
+    // sheet made by the older script (7 columns): add the "Updated" heading
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
   }
   return sheet;
+}
+/** Mobile as stored in the sheet, as 11 digits (puts back a leading 0 a sheet may have dropped). */
+function mobile_(v) {
+  const d = String(v == null ? '' : v).replace(/\D/g, '');
+  return /^9\d{9}$/.test(d) ? '0' + d : d;
 }
 function clean_(s, max) {
   return String(s == null ? '' : s).replace(/[\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
