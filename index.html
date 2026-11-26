@@ -1443,6 +1443,75 @@
       padding: 1.3rem
     }
 
+    /* one card per account: side by side on wider screens */
+    .gift-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))
+    }
+
+    .gift .box {
+      text-align: center;
+      border-style: solid;
+      border-color: var(--line);
+      box-shadow: var(--shadow)
+    }
+
+    .gift h3 {
+      font: 600 .78rem/1.4 var(--sans);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--rose-text);
+      margin: 0 0 .9rem
+    }
+
+    .gift .qr {
+      width: min(13rem, 100%);
+      height: auto;
+      margin: 0 auto 1rem;
+      background: #fff;
+      padding: .6rem;
+      border-radius: .8rem;
+      border: 1px solid var(--line)
+    }
+
+    .gift dl {
+      margin: 0 0 1rem
+    }
+
+    /* RSVP contact line: number and email as tappable pills */
+    .rsvp-contact .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: .6rem
+    }
+
+    .rsvp-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      min-height: 2.75rem;
+      padding: .5rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--cream);
+      color: var(--rose-text);
+      font-weight: 600;
+      text-decoration: none;
+      overflow-wrap: anywhere
+    }
+
+    .rsvp-contact a:hover {
+      background: var(--blush)
+    }
+
+    .gift-hint {
+      text-align: center;
+      margin: 0 0 1rem
+    }
+
     .gift dt {
       font: 500 .68rem/1.4 var(--sans);
       letter-spacing: .2em;
@@ -2284,6 +2353,15 @@
       <symbol id="i-copy" viewBox="0 0 24 24">
         <path d="M9 9h11v11H9zM5 15H4V4h11v1" />
       </symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24">
+        <path d="M8 3h8v18H8zM11 18h2" />
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <path d="M3 6h18v12H3zM3 6l9 7 9-7" />
+      </symbol>
+      <symbol id="i-down" viewBox="0 0 24 24">
+        <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+      </symbol>
       <symbol id="i-cam" viewBox="0 0 24 24">
         <path d="M4 8h3l1.5-2h7L17 8h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
       </symbol>
@@ -2336,12 +2414,12 @@
       <div class="wrap">
         <a class="mono" href="#top" aria-label="Back to top">J &amp; C</a>
         <div class="pills" id="pills">
-          <a href="#invitation" data-i18n="navInvitation">Invitation</a><a href="#story"
-            data-i18n="navStory">Our Story</a><a href="#program" data-i18n="navProgram">Program</a><a
-            href="#venues" data-i18n="navVenues">Venues</a><a href="#entourage"
-            data-i18n="navEntourage">Entourage</a><a href="#dresscode" data-i18n="navDress">Dress Code</a><a
-            href="#gifts" data-i18n="navGifts">Gifts</a><a href="#gallery" data-i18n="navGallery">Gallery</a><a
-            href="#faq" data-i18n="navFaq">FAQ</a><a href="#rsvp" data-i18n="navRsvp">RSVP</a>
+          <a href="#invitation" data-i18n="navInvitation">Invitation</a><a href="#story" data-i18n="navStory">Our
+            Story</a><a href="#program" data-i18n="navProgram">Program</a><a href="#venues"
+            data-i18n="navVenues">Venues</a><a href="#entourage" data-i18n="navEntourage">Entourage</a><a
+            href="#dresscode" data-i18n="navDress">Dress Code</a><a href="#gifts" data-i18n="navGifts">Gifts</a><a
+            href="#gallery" data-i18n="navGallery">Gallery</a><a href="#faq" data-i18n="navFaq">FAQ</a><a href="#rsvp"
+            data-i18n="navRsvp">RSVP</a>
         </div>
         <a class="btn sm" href="#rsvp" data-i18n="navRsvp">RSVP</a>
       </div>
@@ -2364,8 +2442,8 @@
           <p class="hero-sub" id="heroSub"></p>
           <!-- countdown; after DATA.event.endISO it becomes the "Thank you" message -->
           <div class="count" id="count" role="timer" aria-label="Countdown to the wedding"></div>
-          <div class="cta"><a class="btn" href="#rsvp" data-i18n="navRsvp">RSVP</a><a class="btn ghost"
-              href="#venues" data-i18n="ctaDetails">Event details</a>
+          <div class="cta"><a class="btn" href="#rsvp" data-i18n="navRsvp">RSVP</a><a class="btn ghost" href="#venues"
+              data-i18n="ctaDetails">Event details</a>
           </div>
         </div>
       </header>
@@ -2483,6 +2561,9 @@
             <div class="divider" data-divider></div>
           </div>
           <div class="gal reveal" id="gal"></div>
+          <!-- shows the rest of the gallery (DATA.galleryShownFirst decides how many show at first) -->
+          <div class="centerbtn"><button class="btn ghost" id="galBtn" type="button" aria-expanded="false"
+              aria-controls="gal" hidden>View all photos</button></div>
         </div>
       </section>
 
@@ -2510,6 +2591,8 @@
             <!-- explains how to change a reply (same name + same mobile = update) -->
             <p class="note" id="rsvpEditNote" data-i18n="rsvpEditNote">Need to change your reply? Send the form again
               with the same name and the same mobile number, and we will update it.</p>
+            <!-- contact for RSVP questions (DATA.rsvp.contact) -->
+            <p class="note rsvp-contact" id="rsvpContact" hidden></p>
           </div>
           <div class="formcard reveal" id="formCard">
             <form id="rsvpForm" novalidate autocomplete="on">
@@ -2530,8 +2613,8 @@
               <fieldset>
                 <legend data-i18n="lblAttend">Will you attend?</legend>
                 <div class="choice">
-                  <label><input type="radio" name="attend" value="yes" checked><span
-                      data-i18n="optYes">Joyfully accepts</span></label>
+                  <label><input type="radio" name="attend" value="yes" checked><span data-i18n="optYes">Joyfully
+                      accepts</span></label>
                   <label><input type="radio" name="attend" value="no"><span data-i18n="optNo">Regretfully
                       declines</span></label>
                 </div>
@@ -2542,8 +2625,7 @@
               </div>
               <div id="dietRow">
                 <label for="fdiet" data-i18n="lblDiet">Dietary restrictions or allergies (optional)</label>
-                <input type="text" id="fdiet" name="diet" maxlength="200" placeholder="None"
-                  data-i18n-ph="phDiet">
+                <input type="text" id="fdiet" name="diet" maxlength="200" placeholder="None" data-i18n-ph="phDiet">
               </div>
               <div>
                 <label for="fmsg" data-i18n="lblMsg">Message for the couple (optional)</label>
@@ -2628,43 +2710,43 @@
 
         <!-- ===== Tab 1: replies from the Google Sheet ===== -->
         <div role="tabpanel" id="panelReplies" aria-labelledby="tabReplies">
-        <div class="stats">
-          <div><b id="stAtt">0</b><span>Attending</span></div>
-          <div><b id="stDec">0</b><span>Declined</span></div>
-          <div><b id="stSeats">0</b><span>Seats confirmed</span></div>
-          <div><b id="stAll">0</b><span>Total replies</span></div>
-        </div>
-        <div class="tools">
-          <label class="sr" for="aq">Search</label><input type="search" id="aq"
-            placeholder="Search name, mobile or message">
-          <label class="sr" for="af">Filter</label>
-          <select id="af">
-            <option value="all">All replies</option>
-            <option value="yes">Attending</option>
-            <option value="no">Declined</option>
-          </select>
-          <button class="btn sm" type="button" id="aCsv">Download CSV</button>
-          <button class="btn sm ghost" type="button" id="aRefresh">Refresh</button>
-          <button class="btn sm ghost" type="button" id="aOut">Sign out</button>
-        </div>
-        <p class="note" id="aCount"></p>
-        <div class="tablewrap" tabindex="0" aria-label="RSVP table, scrollable">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Reply</th>
-                <th>Seats</th>
-                <th>Dietary</th>
-                <th>Message</th>
-                <th>Sent</th>
-              </tr>
-            </thead>
-            <tbody id="aRows"></tbody>
-          </table>
-        </div>
+          <div class="stats">
+            <div><b id="stAtt">0</b><span>Attending</span></div>
+            <div><b id="stDec">0</b><span>Declined</span></div>
+            <div><b id="stSeats">0</b><span>Seats confirmed</span></div>
+            <div><b id="stAll">0</b><span>Total replies</span></div>
+          </div>
+          <div class="tools">
+            <label class="sr" for="aq">Search</label><input type="search" id="aq"
+              placeholder="Search name, mobile or message">
+            <label class="sr" for="af">Filter</label>
+            <select id="af">
+              <option value="all">All replies</option>
+              <option value="yes">Attending</option>
+              <option value="no">Declined</option>
+            </select>
+            <button class="btn sm" type="button" id="aCsv">Download CSV</button>
+            <button class="btn sm ghost" type="button" id="aRefresh">Refresh</button>
+            <button class="btn sm ghost" type="button" id="aOut">Sign out</button>
+          </div>
+          <p class="note" id="aCount"></p>
+          <div class="tablewrap" tabindex="0" aria-label="RSVP table, scrollable">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Reply</th>
+                  <th>Seats</th>
+                  <th>Dietary</th>
+                  <th>Message</th>
+                  <th>Sent</th>
+                </tr>
+              </thead>
+              <tbody id="aRows"></tbody>
+            </table>
+          </div>
         </div>
 
         <!-- ===== Tab 2: personal invite links + who has not replied yet ===== -->
@@ -2673,7 +2755,8 @@
             A first line of <code>name,seats</code> is skipped. A blank seat count uses the default
             (<span id="glDefault"></span>). Export a sheet as CSV, or paste the two columns here.</p>
           <label for="glCsv">Guest list (CSV)</label>
-          <textarea id="glCsv" spellcheck="false" placeholder="name,seats&#10;Maria Santos,2&#10;Juan Dela Cruz,1"></textarea>
+          <textarea id="glCsv" spellcheck="false"
+            placeholder="name,seats&#10;Maria Santos,2&#10;Juan Dela Cruz,1"></textarea>
           <div class="tools" style="margin-top:.8rem">
             <input type="file" id="glFile" accept=".csv,.txt,text/csv,text/plain" class="sr">
             <label class="btn sm ghost upl" for="glFile" style="margin:0">Upload CSV file</label>
@@ -2692,7 +2775,11 @@
                   <th><span class="sr">Copy</span></th>
                 </tr>
               </thead>
-              <tbody id="glRows"><tr><td colspan="5">Paste or upload your guest list, then press Generate links.</td></tr></tbody>
+              <tbody id="glRows">
+                <tr>
+                  <td colspan="5">Paste or upload your guest list, then press Generate links.</td>
+                </tr>
+              </tbody>
             </table>
           </div>
 
@@ -2786,25 +2873,26 @@
       /* ---- Love story (4 milestones). Replace the paragraphs with your own.
               Add a photo by putting a file in images/ and setting photo: "images/your-file.jpg" ---- */
       story: [
+        /* pos = which part of the photo stays visible when it is cropped to the 4:3 frame */
         {
           when: "Chapter one", title: "How We Met",
-          text: "Every love story has a beginning, and ours started with a simple hello. [Edit this paragraph: where and when you met, and what you remember most.]",
-          photo: "", alt: "Jay Cris and Cloe May when they first met"
+          text: "We started as elementary classmates in Siagao. Life took us to different places: Jay Cris to Davao, Cloe May to Gamut. But years later, after high school, fate brought us back together in Siagao during the fiesta. One number, one text, and the rest is history.",
+          photo: "images/story-1.jpg", alt: "Jay Cris and Cloe May smiling in a selfie by the water", pos: "50% 58%"
         },
         {
           when: "Chapter two", title: "Our First Date",
-          text: "A quiet afternoon, nervous smiles and conversation that never seemed to end. [Edit this paragraph with the story of your first date.]",
-          photo: "", alt: "Jay Cris and Cloe May on their first date"
+          text: "Cloe May was in Panabo City, and Jay Cris came all the way from Davao to see her. We had our first date at the plaza in Panabo City, then ate at Mang Inasal. Simple, but it was the start of everything.",
+          photo: "images/story-2.jpg", alt: "Jay Cris and Cloe May smiling in a selfie in front of a lit-up building at night", pos: "50% 42%"
         },
         {
           when: "Chapter three", title: "The Proposal",
-          text: "He asked, and she said yes, and the rest is the happiest part of our story. [Edit this paragraph with how the proposal happened.]",
-          photo: "", alt: "The proposal"
+          text: "There was no grand, romantic proposal. Jay Cris simply went straight to asking for her hand in marriage, because he already knew she was the one.",
+          photo: "images/story-3.jpg", alt: "Jay Cris and Cloe May with their families around a table of food and lechon", pos: "50% 64%"
         },
         {
           when: "December 18, 2026", title: "Forever Begins",
-          text: "Surrounded by the family and friends who have carried us this far, we begin our forever. We cannot wait to celebrate with you.",
-          photo: "", alt: "Jay Cris and Cloe May on their wedding day"
+          text: "Our forever did not begin with a grand proposal. It began when two childhood classmates met again, chose each other, and decided to stay.",
+          photo: "images/story-4.jpg", alt: "Jay Cris and Cloe May running hand in hand under a sunset sky", pos: "72% 55%"
         }
       ],
 
@@ -2913,24 +3001,74 @@
       },
 
       /* ---- Gift details (shown when guests tap "Show details").
-              EDIT: replace every [PLACEHOLDER] with your real details, or delete the line. ---- */
+              label = account type, name = account name, number = account number (optional, "" hides it),
+              qr = InstaPay QR code image in images/finance_account/ ("" hides it). ---- */
       gifts: [
-        { label: "GCash", value: "[PLACEHOLDER] 09XX XXX XXXX · Account name" },
-        { label: "Bank transfer", value: "[PLACEHOLDER] Bank name · Account number · Account name" }
+        { label: "GCash", name: "Cloe May Montenegro", number: "", qr: "images/finance_account/gcash.jpg", w: 471, h: 471 },
+        { label: "Landbank", name: "Cloe May Montenegro", number: "", qr: "images/finance_account/landbank.jpg", w: 860, h: 877 }
       ],
 
       /* ---- Coordinator shown in the footer. EDIT: name and mobile. ---- */
-      coordinator: { name: "[PLACEHOLDER] Coordinator Name", mobile: "09XX XXX XXXX" },
+      coordinator: { name: "Joevan Espanta Dionio", mobile: "0981-598-9585" },
 
-      /* ---- Gallery: 8 slots. src "" shows a placeholder. To add a photo, put the file
-              in images/ and set src: "images/your-file.jpg". pos = which part stays visible when cropped. ---- */
+      /* ---- Gallery. Web-sized copies live in images/gallery/ (the camera originals stay in
+              images/gallerry_add/, which is not uploaded). Each photo has a .jpg plus -600.webp and
+              -1200.webp copies; w / h = size of the .jpg. The first galleryShownFirst photos show
+              on the page; the rest appear when guests tap "View all photos". Reorder lines to change
+              which photos show first. Add pos: "50% 30%" to choose which part stays visible in the
+              portrait-shaped tile. ---- */
+      galleryShownFirst: 8,
       gallery: [
-        { src: "images/prenup-1.jpg", alt: "Jay Cris and Cloe May embracing among coconut trees", pos: "46% 40%" },
-        { src: "images/prenup-2.jpg", alt: "Jay Cris and Cloe May standing back to back on a sunlit garden path", pos: "56% 40%" },
-        { src: "images/prenup-3.jpg", alt: "Jay Cris and Cloe May embracing by the sea", pos: "40% 58%" },
-        { src: "", alt: "Prenup photo 4" }, { src: "", alt: "Prenup photo 5" },
-        { src: "", alt: "Prenup photo 6" }, { src: "", alt: "Prenup photo 7" },
-        { src: "", alt: "Prenup photo 8" }
+        { src: "images/gallery/JGM04941.jpg", w: 1200, h: 800, alt: "Jay Cris hugging Cloe May from behind among the trees" },
+        { src: "images/gallery/JGM04979.jpg", w: 1200, h: 800, alt: "Jay Cris kissing Cloe May on the cheek in the garden" },
+        { src: "images/gallery/JGM04988.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May by a white A-frame cabin" },
+        { src: "images/gallery/JGM05031.jpg", w: 800, h: 1200, alt: "Cloe May in her navy gown among pine branches" },
+        { src: "images/gallery/JGM05120.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May running together on the beach" },
+        { src: "images/gallery/JGM05218.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May forehead to forehead against a golden sunset" },
+        { src: "images/gallery/JGM05236.jpg", w: 1200, h: 800, alt: "Jay Cris lifting Cloe May by the sea, her dress flowing" },
+        { src: "images/gallery/JGM05295.jpg", w: 800, h: 1200, alt: "Jay Cris and Cloe May sitting together on her dress by the sea, smiling back" },
+        { src: "images/gallery/JGM04926.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May walking hand in hand along a garden path" },
+        { src: "images/gallery/JGM04928.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May smiling side by side in a garden" },
+        { src: "images/gallery/JGM04946.jpg", w: 1200, h: 800, alt: "Close-up of Jay Cris holding Cloe May in her navy gown" },
+        { src: "images/gallery/JGM04948.jpg", w: 800, h: 1200, alt: "Jay Cris hugging Cloe May from behind in front of a cottage" },
+        { src: "images/gallery/JGM04952.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May holding hands on a lawn among palm trees" },
+        { src: "images/gallery/JGM04957.jpg", w: 800, h: 1200, alt: "Cloe May walking ahead in her navy gown, Jay Cris behind her" },
+        { src: "images/gallery/JGM04963.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May embracing in a sunlit garden" },
+        { src: "images/gallery/JGM04968.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May on a garden path among large leaves" },
+        { src: "images/gallery/JGM04970.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May smiling at each other among the greenery" },
+        { src: "images/gallery/JGM04985.jpg", w: 1200, h: 800, alt: "Jay Cris in his white suit, Cloe May behind him" },
+        { src: "images/gallery/JGM05004.jpg", w: 1200, h: 800, alt: "Jay Cris seated on a bench by the A-frame cabin, Cloe May beside him" },
+        { src: "images/gallery/JGM05006.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May laughing together by the A-frame cabin" },
+        { src: "images/gallery/JGM05009.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May close together beside the cabin door" },
+        { src: "images/gallery/JGM05015.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May holding hands in front of the A-frame cabin" },
+        { src: "images/gallery/JGM05019.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May walking together past the cabins" },
+        { src: "images/gallery/JGM05022.jpg", w: 1200, h: 800, alt: "Jay Cris leaning on a bench by the cabin" },
+        { src: "images/gallery/JGM05027.jpg", w: 1200, h: 800, alt: "Jay Cris in his white suit by the cabin door" },
+        { src: "images/gallery/JGM05028.jpg", w: 800, h: 1200, alt: "Jay Cris standing by the cabin" },
+        { src: "images/gallery/JGM05034.jpg", w: 1200, h: 800, alt: "Cloe May smiling among pine branches" },
+        { src: "images/gallery/JGM05105.jpg", w: 1200, h: 800, alt: "Their shoes on the sand: his combat boots and her white heels" },
+        { src: "images/gallery/JGM05109.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May holding hands on the beach, he in uniform" },
+        { src: "images/gallery/JGM05125.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May forehead to forehead on the beach" },
+        { src: "images/gallery/JGM05153.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May laughing together by a wooden post" },
+        { src: "images/gallery/JGM05170.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May under a thatched beach umbrella, arms raised" },
+        { src: "images/gallery/JGM05172.jpg", w: 800, h: 1200, alt: "Jay Cris in uniform and cap on the shore" },
+        { src: "images/gallery/JGM05178.jpg", w: 800, h: 1200, alt: "Cloe May smiling on the beach" },
+        { src: "images/gallery/JGM05187.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May in a wooden frame by the sea, her floral dress trailing on the grass" },
+        { src: "images/gallery/JGM05191.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May embracing in a wooden frame by the sea" },
+        { src: "images/gallery/JGM05219.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May close together by the sea at dusk" },
+        { src: "images/gallery/JGM05223.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May holding hands, her long floral dress on the grass" },
+        { src: "images/gallery/JGM05229.jpg", w: 1200, h: 793, alt: "Jay Cris and Cloe May kissing in silhouette against a sunset sky" },
+        { src: "images/gallery/JGM05243.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May laughing in a close embrace" },
+        { src: "images/gallery/JGM05244.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May by the sea at sunset" },
+        { src: "images/gallery/JGM05275.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May holding hands by the shore" },
+        { src: "images/gallery/JGM05287.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May laughing together by the water" },
+        { src: "images/gallery/JGM05291.jpg", w: 800, h: 1200, alt: "Jay Cris and Cloe May sitting on the grass facing the sea" },
+        { src: "images/gallery/JGM05299.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May giving each other a high five on the grass by the sea" },
+        { src: "images/gallery/JGM05305.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May laughing together while sitting on the grass" },
+        { src: "images/gallery/JGM05306.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May sitting together, sharing a laugh" },
+        { src: "images/gallery/JGM05309.jpg", w: 1200, h: 800, alt: "Jay Cris and Cloe May sitting together, he points at something in the distance" },
+        { src: "images/gallery/JGM05311.jpg", w: 800, h: 1200, alt: "Jay Cris and Cloe May sitting by the sea, holding hands" },
+        { src: "images/gallery/JGM05314.jpg", w: 800, h: 1200, alt: "A lone tree against a pale sky" }
       ],
       heroPhoto: { src: "images/prenup-1.jpg", alt: "Jay Cris and Cloe May embracing among coconut trees", pos: "48% 40%" },
       invitePhoto: { src: "images/prenup-2.jpg", alt: "Jay Cris and Cloe May standing back to back on a garden path" },
@@ -2943,7 +3081,11 @@
       photoSizes: {
         "images/prenup-1.jpg": { w: 1800, h: 1200, webp: [600, 1200, 1800], small: 800 },
         "images/prenup-2.jpg": { w: 1800, h: 1200, webp: [600, 1200, 1800], small: 800 },
-        "images/prenup-3.jpg": { w: 1200, h: 1800, webp: [600, 1200], small: 800 }
+        "images/prenup-3.jpg": { w: 1200, h: 1800, webp: [600, 1200], small: 800 },
+        "images/story-1.jpg": { w: 1080, h: 1440, webp: [600, 1080], small: 800 },
+        "images/story-2.jpg": { w: 720, h: 722, webp: [600, 720] },
+        "images/story-3.jpg": { w: 1200, h: 1600, webp: [600, 1200], small: 800 },
+        "images/story-4.jpg": { w: 1800, h: 1200, webp: [600, 1200, 1800], small: 800 }
       },
 
       /* ---- Music. EDIT: put your mp3 in the music/ folder and write its path here,
@@ -2954,10 +3096,10 @@
 
       /* ---- FAQ ---- */
       faq: [
-        ["Can I bring a plus-one?", "Only guests named on the invitation, with seats reserved as indicated."],
-        ["Are children welcome?", "Only children named on the invitation and those in the entourage."],
+        ["Can I bring a plus-one?", "Yes, it's okay to bring a plus-one! Please include them in the number of seats on your RSVP."],
+        ["Are children welcome?", "Yes, children are welcome! Please include them in the number of seats on your RSVP."],
         ["What time should I arrive?", "Please arrive at the church by 12:30 PM."],
-        ["Is the ceremony unplugged?", "Yes, kindly keep phones away during the ceremony; our photographers have it covered."],
+        ["Can I use my phone to take photos and videos?", "Yes, feel free to use your phone to capture the moments! Please share them with our hashtag below."],
         ["How far is the reception from the church?", "The reception is in Victoria, Tago; please allow travel time from Tina, San Miguel. Use the directions buttons above."],
         ["Is there parking?", "Yes, parking is available at both venues."]
       ],
@@ -2969,6 +3111,8 @@
         deadlineISO: "2026-12-10T23:59:59+08:00",   // form closes after this moment
         deadlineText: "December 10, 2026",
         defaultMaxSeats: 2,                          // can be set per guest with ?seats=3 in their link
+        /* Contact for RSVP questions, shown under "Will you celebrate with us?". "" hides that item. */
+        contact: { mobile: "0985 356 9278", email: "cloe.mont28@gmail.com" },
         adminHint: "The admin password is set in google-apps-script/Code.gs",
         /* Reminder copied from the admin "Not yet replied" list.
            {name} = guest name, {link} = their personal link, {deadline} = deadlineText above. */
@@ -3008,11 +3152,15 @@
           giftEyebrow: "Gift Guide", giftTitle: "Your presence is the greatest gift",
           giftLead: "But if you wish to bless us as we begin our new life together, a monetary gift would be sincerely appreciated.",
           giftShow: "Show details", giftHide: "Hide details",
+          giftHint: "Scan with GCash or any bank app that supports InstaPay. On your phone, save the QR code, then upload it in the app.",
+          giftAcct: "Account name", giftNum: "Account number", giftSave: "Save QR code",
           galEyebrow: "Prenup Gallery", galTitle: "A few of our favorites",
+          galMore: "View all {n} photos", galLess: "Show fewer photos",
           faqEyebrow: "FAQ", faqTitle: "Good to know",
           rsvpEyebrow: "RSVP", rsvpTitle: "Will you celebrate with us?",
           rsvpNote: "Kindly reply on or before {deadline}.",
           rsvpEditNote: "Need to change your reply? Send the form again with the same name and the same mobile number, and we will update it.",
+          rsvpContact: "Questions about your RSVP? Call, text or email us:",
           lblName: "Full name", lblMobile: "Mobile number", lblAttend: "Will you attend?",
           optYes: "Joyfully accepts", optNo: "Regretfully declines",
           lblSeats: "Seats reserved for you", lblSeatOne: "Seat reserved for you: 1", seatOne: "{n} seat", seatMany: "{n} seats",
@@ -3091,14 +3239,21 @@
           giftLead: "Apan kung gusto ninyo kami panalanginan samtang magsugod mi sa among bag-ong kinabuhi, ang regalong kwarta among kinasingkasing nga pasalamatan.", // REVIEW WITH A NATIVE SPEAKER
           giftShow: "Ipakita ang detalye",                   // REVIEW WITH A NATIVE SPEAKER
           giftHide: "Itago ang detalye",                     // REVIEW WITH A NATIVE SPEAKER
+          giftHint: "I-scan gamit ang GCash o bisan unsang bank app nga adunay InstaPay. Kung naa sa imong cellphone, i-save ang QR code, dayon i-upload kini sa app.", // REVIEW WITH A NATIVE SPEAKER
+          giftAcct: "Pangalan sa account",                   // REVIEW WITH A NATIVE SPEAKER
+          giftNum: "Numero sa account",                      // REVIEW WITH A NATIVE SPEAKER
+          giftSave: "I-save ang QR code",                    // REVIEW WITH A NATIVE SPEAKER
           galEyebrow: "Mga Litrato sa Prenup",               // REVIEW WITH A NATIVE SPEAKER
           galTitle: "Pipila sa among mga paborito",          // REVIEW WITH A NATIVE SPEAKER
+          galMore: "Tan-awa ang tanang {n} ka litrato",      // REVIEW WITH A NATIVE SPEAKER
+          galLess: "Ipakita ang mas gamay nga litrato",      // REVIEW WITH A NATIVE SPEAKER
           faqEyebrow: "Pangutana",                           // REVIEW WITH A NATIVE SPEAKER
           faqTitle: "Maayong mahibal-an",                    // REVIEW WITH A NATIVE SPEAKER
           rsvpEyebrow: "RSVP",                               // REVIEW WITH A NATIVE SPEAKER
           rsvpTitle: "Mosaulog ba ka uban kanamo?",          // REVIEW WITH A NATIVE SPEAKER
           rsvpNote: "Palihug pagtubag sa dili pa molapas ang {deadline}.", // REVIEW WITH A NATIVE SPEAKER
           rsvpEditNote: "Gusto ba nimo usbon ang imong tubag? Ipadala pag-usab ang form gamit ang samang pangalan ug samang mobile number, ug among i-update kini.", // REVIEW WITH A NATIVE SPEAKER
+          rsvpContact: "Naa kay pangutana bahin sa RSVP? Tawag, text o email kanamo:", // REVIEW WITH A NATIVE SPEAKER
           lblName: "Tibuok nga pangalan",                    // REVIEW WITH A NATIVE SPEAKER
           lblMobile: "Mobile number",                        // REVIEW WITH A NATIVE SPEAKER
           lblAttend: "Motambong ka ba?",                     // REVIEW WITH A NATIVE SPEAKER
@@ -3139,10 +3294,10 @@
           musicMute: "Hilona ang musika",                    // REVIEW WITH A NATIVE SPEAKER
           musicFail: "Dili ma-play ang musika",              // REVIEW WITH A NATIVE SPEAKER
           faq: [
-            ["Pwede ba ko magdala og kauban?", "Ang mga bisita lang nga nakapangalan sa imbitasyon, sumala sa gidaghanon sa lingkoranan nga gireserba."], // REVIEW WITH A NATIVE SPEAKER
-            ["Pwede ba ang mga bata?", "Ang mga bata lang nga nakapangalan sa imbitasyon ug kadtong apil sa entourage."], // REVIEW WITH A NATIVE SPEAKER
+            ["Pwede ba ko magdala og kauban?", "Oo, pwede ra kaayo magdala og kauban! Palihug iapil sila sa gidaghanon sa lingkoranan sa imong RSVP."], // REVIEW WITH A NATIVE SPEAKER
+            ["Pwede ba ang mga bata?", "Oo, malipayon namong dawaton ang mga bata! Palihug iapil sila sa gidaghanon sa lingkoranan sa imong RSVP."], // REVIEW WITH A NATIVE SPEAKER
             ["Unsang orasa ko moabot?", "Palihug pag-abot sa simbahan sa dili pa ang 12:30 PM."], // REVIEW WITH A NATIVE SPEAKER
-            ["Unplugged ba ang seremonya?", "Oo, palihug itago ang cellphone panahon sa seremonya; ang among mga photographer na ang bahala."], // REVIEW WITH A NATIVE SPEAKER
+            ["Pwede ba ko mogamit og cellphone sa pagkuha og litrato ug video?", "Oo, gawasnon ka nga mogamit sa imong cellphone aron makuha ang mga higayon! Palihug ipaambit kini gamit ang among hashtag sa ubos."], // REVIEW WITH A NATIVE SPEAKER
             ["Unsa kalayo ang reception gikan sa simbahan?", "Ang reception naa sa Victoria, Tago; palihug paggahin og oras sa pagbiyahe gikan sa Tina, San Miguel. Gamita ang mga Direksyon nga button sa ibabaw."], // REVIEW WITH A NATIVE SPEAKER
             ["Naa bay parkingan?", "Oo, naay parkingan sa duha ka lugar."] // REVIEW WITH A NATIVE SPEAKER
           ]
@@ -3218,7 +3373,7 @@
       /* ---------- photos: WebP <picture> with a JPG fallback (sizes from DATA.photoSizes).
                     o.sizes tells the browser how wide the photo shows, so phones get the small file. ---------- */
       function pic(src, alt, o = {}) {
-        const info = DATA.photoSizes && DATA.photoSizes[src], base = esc(String(src).replace(/\.jpe?g$/i, ''));
+        const info = o.info || (DATA.photoSizes && DATA.photoSizes[src]), base = esc(String(src).replace(/\.jpe?g$/i, ''));
         const attrs = (o.cls ? ` class="${esc(o.cls)}"` : '') + ` alt="${esc(alt)}"` + (o.lazy ? ' loading="lazy"' : '') +
           (o.priority ? ' fetchpriority="high"' : ' decoding="async"') + (o.pos ? ` style="object-position:${esc(o.pos)}"` : '');
         if (!info) return `<img src="${esc(src)}"${attrs}>`;
@@ -3243,7 +3398,7 @@
 
       /* ---------- love story ---------- */
       $('#timeline').innerHTML = DATA.story.map(s => {
-        const media = s.photo ? `<div class="photo">${pic(s.photo, s.alt, { lazy: true, sizes: '(min-width: 48rem) 28rem, 92vw' })}</div>`
+        const media = s.photo ? `<div class="photo">${pic(s.photo, s.alt, { lazy: true, pos: s.pos, sizes: '(min-width: 48rem) 28rem, 92vw' })}</div>`
           : `<div class="ph" role="img" aria-label="Photo placeholder: ${esc(s.title)}">${ico('i-cam')}<span>Photo placeholder</span></div>`;
         return `<article class="tl-item reveal"><div class="tl-text"><p class="tl-when">${esc(s.when)}</p><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>${media}</article>`;
       }).join('');
@@ -3289,7 +3444,15 @@
       /* ---------- dress code, gifts, hashtag, coordinator ---------- */
       $('#swatches').innerHTML = DATA.dress.swatches.map(s => `<div class="sw"><i style="background:${esc(s.hex)}"></i><span>${esc(s.name)}</span></div>`).join('') +
         `<div class="sw no"><i></i><span data-i18n="avoidWhite">Avoid white</span></div>`;
-      $('#giftBox').innerHTML = `<div class="box"><span class="edit-flag">DETAILS</span><dl style="margin:0">${DATA.gifts.map(g => `<dt>${esc(g.label)}</dt><dd>${esc(g.value)}</dd>`).join('')}</dl></div>`;
+      /* gift accounts: QR code + account name, and a "Save QR code" button (a phone cannot scan its own screen;
+         guests save the image, then upload it in GCash or their bank app) */
+      $('#giftBox').innerHTML = `<p class="note gift-hint" data-i18n="giftHint">Scan with GCash or any bank app that supports InstaPay.</p><div class="gift-grid">` +
+        DATA.gifts.map(g => `<div class="box">
+          <h3>${esc(g.label)}</h3>
+          ${g.qr ? `<img class="qr" src="${esc(g.qr)}" alt="${esc(g.label)} InstaPay QR code for ${esc(g.name)}" width="${+g.w || 400}" height="${+g.h || 400}" loading="lazy">` : ''}
+          <dl><dt data-i18n="giftAcct">Account name</dt><dd>${esc(g.name)}</dd>${g.number ? `<dt data-i18n="giftNum">Account number</dt><dd>${esc(g.number)}</dd>` : ''}</dl>
+          ${g.qr ? `<a class="btn sm ghost" href="${esc(g.qr)}" download="${esc(g.label.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}-qr.jpg">${ico('i-down')} <span data-i18n="giftSave">Save QR code</span></a>` : ''}
+        </div>`).join('') + `</div>`;
       const giftLabel = () => { $('#giftBtn').textContent = T($('#giftBox').hidden ? 'giftShow' : 'giftHide'); };
       $('#giftBtn').addEventListener('click', e => {
         const open = $('#giftBox').hidden;
@@ -3344,12 +3507,29 @@
 
       /* ---------- gallery + lightbox ---------- */
       const G = DATA.gallery;
+      // gallery photos carry their own size (w, h); their WebP copies are 600 and 1200 wide
+      const gInfo = g => (g.w ? { w: g.w, h: g.h, webp: [600, 1200] } : null);
       const tile = (g, i, big) => g.src
-        ? (big ? pic(g.src, g.alt, { sizes: '100vw' })
-          // tiles are portrait, so landscape photos show wider than the tile itself
-          : pic(g.src, g.alt, { lazy: true, pos: g.pos || '50% 50%', sizes: '(min-width: 40rem) 30rem, 95vw' }))
+        ? (big ? pic(g.src, g.alt, { sizes: '100vw', info: gInfo(g) })
+          // tiles are portrait (4:5): a landscape photo shows about twice as wide as its tile
+          : pic(g.src, g.alt, {
+            lazy: true, pos: g.pos || '50% 50%', info: gInfo(g),
+            sizes: g.w > g.h ? '(min-width: 40rem) 30rem, 90vw' : '(min-width: 40rem) 16rem, 48vw'
+          }))
         : `<div class="ph" role="img" aria-label="${esc(g.alt)}">${ico('i-cam')}<span>${big ? esc(g.alt) : 'Photo ' + (i + 1)}</span></div>`;
-      $('#gal').innerHTML = G.map((g, i) => `<button type="button" data-i="${i}" aria-label="Open photo ${i + 1} of ${G.length}">${tile(g, i)}</button>`).join('');
+      /* first DATA.galleryShownFirst photos show; the rest are hidden (and not downloaded) until "View all" */
+      const galFirst = Math.max(1, DATA.galleryShownFirst || 8);
+      $('#gal').innerHTML = G.map((g, i) => `<button type="button" data-i="${i}" aria-label="Open photo ${i + 1} of ${G.length}"${i >= galFirst ? ' data-more hidden' : ''}>${tile(g, i)}</button>`).join('');
+      const galBtn = $('#galBtn');
+      galBtn.hidden = G.length <= galFirst;
+      const galLabel = () => { galBtn.textContent = T(galBtn.getAttribute('aria-expanded') === 'true' ? 'galLess' : 'galMore', { n: G.length }); };
+      galBtn.addEventListener('click', () => {
+        const open = galBtn.getAttribute('aria-expanded') !== 'true';
+        $$('#gal [data-more]').forEach(b => { b.hidden = !open; });
+        galBtn.setAttribute('aria-expanded', String(open)); galLabel();
+        if (open) $(`#gal [data-i="${galFirst}"]`).focus({ preventScroll: true });   // move to the first new photo
+        else $('#gallery').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+      });
       let lbIndex = 0, lbOpener = null;
       const lb = $('#lb');
       function lbShow(i) {
@@ -3419,6 +3599,16 @@
         $('#lblSeats').textContent = T(maxSeats === 1 ? 'lblSeatOne' : 'lblSeats');
         sel.hidden = maxSeats === 1;
       }
+      /* contact line under the RSVP heading: tap to call / tap to email */
+      (function () {
+        const c = R.contact || {}, num = String(c.mobile || '').replace(/\D/g, ''), mail = String(c.email || '').trim();
+        const items = [];
+        if (/^09\d{9}$/.test(num)) items.push(`<a href="tel:+63${num.slice(1)}">${ico('i-phone')} ${esc(c.mobile)}</a>`);
+        if (/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(mail)) items.push(`<a href="mailto:${esc(mail)}">${ico('i-mail')} ${esc(mail)}</a>`);
+        if (!items.length) return;
+        $('#rsvpContact').innerHTML = `<span data-i18n="rsvpContact">Questions about your RSVP? Call, text or email us:</span><span class="links">${items.join('')}</span>`;
+        $('#rsvpContact').hidden = false;
+      })();
       function showClosed() { $('#formCard').hidden = true; $('#rsvpEditNote').hidden = true; $('#closedMsg').hidden = false; }
       if (now() > deadline) showClosed();
 
@@ -3504,7 +3694,7 @@
         $('#faqList').innerHTML = faqList().map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
         $('#rsvpNote').textContent = T('rsvpNote', { deadline: T('deadline') });
         if (!$('#sendBtn').disabled) $('#sendBtn').textContent = T('btnSend');
-        giftLabel(); renderSeats(); renderThanks(); music.label(); tick();
+        giftLabel(); galLabel(); renderSeats(); renderThanks(); music.label(); tick();
       }
       $$('#langBox button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.lang; store.set('lang', lang); renderText(); }));
 

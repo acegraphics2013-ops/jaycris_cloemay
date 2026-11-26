@@ -62,6 +62,12 @@ Useful links while testing (add to the address):
 
 The script refuses replies after December 10, 2026 (11:59 PM Philippine time) and stores everything as plain text, so nothing a guest types can run as a spreadsheet formula.
 
+### RSVP emails
+
+Every new or changed RSVP is also emailed to `NOTIFY_EMAIL` at the top of `Code.gs` (now `cloe.mont28@gmail.com`), with the guest's name, mobile, reply, seats, dietary note, message and a link to the sheet. It uses Google's free MailApp (about 100 emails a day on a personal Google account). The first time you deploy this version, Google asks you to allow the script to "send email as you"; click **Allow**. To turn the emails off, set `NOTIFY_EMAIL = ''` and redeploy. If an email ever fails, the RSVP is still saved; the error shows under **Executions** in Apps Script.
+
+Guests see a contact line under "Will you celebrate with us?" with tap-to-call and tap-to-email links, set in `DATA.rsvp.contact` in `index.html`.
+
 ### Changing a reply
 
 If a guest sends the form again with a **name that is already in the sheet**:
@@ -116,11 +122,11 @@ Everything about the wedding lives in the clearly labeled `1. WEDDING DATA` bloc
 | Story photos | `photo: ""` inside `story` | put a file in `images/`, then `photo: "images/name.jpg"` |
 | Entourage and sponsors | `entourage:` | a pair is two names, a single name stands alone |
 | Dress code colors | `dress:` | |
-| Gallery photos | `gallery:` | 8 slots; `src: ""` shows a placeholder |
+| Gallery photos | `gallery:` / `galleryShownFirst:` | 50 photos in `images/gallery/` (web copies: `.jpg`, `-600.webp`, `-1200.webp`). The first 8 show; **View all photos** shows the rest. Reorder lines to change which come first. The camera originals in `images/gallerry_add/` are not uploaded (see `.gitignore`) |
 | Hero and invitation photo | `heroPhoto:` / `invitePhoto:` | if you change the hero photo, also change the `preload` line in `<head>` |
 | Fast photo versions | `photoSizes:` | see **Photos** below |
 | Music | `music:` | put the mp3 in `music/`, then `src: "music/name.mp3"` |
-| **Gift details** | `gifts:` | replace the `[PLACEHOLDER]` text |
+| Gift accounts (GCash, Landbank) | `gifts:` | account name, optional number, and the InstaPay QR image in `images/finance_account/` (keep file names without spaces) |
 | **Coordinator name and mobile** | `coordinator:` | shown in the footer |
 | RSVP deadline, default seats | `rsvp:` | the script has its own deadline in `Code.gs` |
 | Reminder message | `reminderText:` | `{name}`, `{link}`, `{deadline}` are filled in |

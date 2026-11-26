@@ -2,3 +2,6 @@
 Thumbs.db
 node_modules/
 .vercel/
+
+# camera originals for the gallery (73 MB); the site uses the web copies in images/gallery/
+images/gallerry_add/

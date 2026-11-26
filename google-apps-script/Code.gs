@@ -17,6 +17,9 @@ const ADMIN_PASSWORD = 'CHANGE-ME';                 // REQUIRED: choose your own
 const RSVP_DEADLINE  = new Date('2026-12-10T23:59:59+08:00'); // replies are refused after this
 const SHEET_NAME     = 'RSVPs';                     // tab name (created automatically)
 const MAX_SEATS      = 10;                          // hard upper limit per reply
+// Every new or changed RSVP is also emailed here (Google's free MailApp, about 100 emails a day).
+// Use '' to turn the emails off. The first deploy after adding this asks you to allow "send email as you".
+const NOTIFY_EMAIL   = 'cloe.mont28@gmail.com';
 /* ======================================================= */
 
 // Column 8 "Updated" is filled when a guest edits their reply (same name + same mobile).
@@ -53,38 +56,75 @@ function handleRsvp_(b) {
   if (attending === 'Regretfully declines') seats = 0;
   else if (!(seats >= 1 && seats <= MAX_SEATS)) return json_({ ok: false, error: 'invalid' });
 
+  const diet = clean_(b.diet, 200), message = clean_(b.message, 500);
+  const stamp = Utilities.formatDate(new Date(), 'Asia/Manila', 'yyyy-MM-dd HH:mm:ss');
+  let result;
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);                                      // one reply at a time, so duplicates cannot slip in
   try {
-    const sheet = getSheet_();
-    const last = sheet.getLastRow();
-    const key = norm_(name);
-    const stamp = Utilities.formatDate(new Date(), 'Asia/Manila', 'yyyy-MM-dd HH:mm:ss');
-    const diet = clean_(b.diet, 200), message = clean_(b.message, 500);
-
-    if (last > 1) {
-      // columns B (Name) and C (Mobile) of every existing reply
-      const rows = sheet.getRange(2, 2, last - 1, 2).getValues();
-      for (let i = 0; i < rows.length; i++) {
-        if (norm_(rows[i][0]) !== key) continue;
-        // Same name already in the sheet.
-        // Same mobile number too: the guest is changing their reply, so update that row.
-        // Different mobile: refuse, so nobody can overwrite someone else's reply.
-        if (mobile_(rows[i][1]) !== mobile) return json_({ ok: false, error: 'duplicate' });
-        const row = sheet.getRange(i + 2, 1, 1, HEADERS.length);
-        const original = String(row.getValues()[0][0]);       // keep the first "Timestamp"
-        row.setNumberFormat('@');                            // plain text, as for new replies
-        row.setValues([[original, name, mobile, attending, String(seats), diet, message, stamp]]);
-        return json_({ ok: true, updated: true });
-      }
-    }
-
-    const range = sheet.getRange(last + 1, 1, 1, HEADERS.length);
-    range.setNumberFormat('@');                              // plain text: nothing typed by a guest can run as a formula
-    range.setValues([[stamp, name, mobile, attending, String(seats), diet, message, '']]);
-    return json_({ ok: true });
+    result = saveRsvp_(name, mobile, attending, seats, diet, message, stamp);
   } finally {
     lock.releaseLock();
+  }
+  // Email after the sheet is saved and the lock is released, so a slow or failed email
+  // never holds up other guests or loses a reply.
+  if (result.ok) notify_(result.updated, { name: name, mobile: mobile, attending: attending, seats: seats, diet: diet, message: message, stamp: stamp });
+  return json_(result);
+}
+
+/** Writes the reply to the sheet. Returns { ok, updated } or { ok: false, error }. Call only while holding the lock. */
+function saveRsvp_(name, mobile, attending, seats, diet, message, stamp) {
+  const sheet = getSheet_();
+  const last = sheet.getLastRow();
+  const key = norm_(name);
+
+  if (last > 1) {
+    // columns B (Name) and C (Mobile) of every existing reply
+    const rows = sheet.getRange(2, 2, last - 1, 2).getValues();
+    for (let i = 0; i < rows.length; i++) {
+      if (norm_(rows[i][0]) !== key) continue;
+      // Same name already in the sheet.
+      // Same mobile number too: the guest is changing their reply, so update that row.
+      // Different mobile: refuse, so nobody can overwrite someone else's reply.
+      if (mobile_(rows[i][1]) !== mobile) return { ok: false, error: 'duplicate' };
+      const row = sheet.getRange(i + 2, 1, 1, HEADERS.length);
+      const original = String(row.getValues()[0][0]);       // keep the first "Timestamp"
+      row.setNumberFormat('@');                            // plain text, as for new replies
+      row.setValues([[original, name, mobile, attending, String(seats), diet, message, stamp]]);
+      return { ok: true, updated: true };
+    }
+  }
+
+  const range = sheet.getRange(last + 1, 1, 1, HEADERS.length);
+  range.setNumberFormat('@');                              // plain text: nothing typed by a guest can run as a formula
+  range.setValues([[stamp, name, mobile, attending, String(seats), diet, message, '']]);
+  return { ok: true, updated: false };
+}
+
+/* ---------------------- email notification ---------------------- */
+/** Plain-text email (guest text is never treated as HTML). Errors are logged, never shown to the guest. */
+function notify_(updated, r) {
+  if (!NOTIFY_EMAIL) return;
+  try {
+    const yes = r.attending === 'Joyfully accepts';
+    const subject = (updated ? 'RSVP changed: ' : 'New RSVP: ') + r.name + ' - ' +
+      (yes ? 'attending (' + r.seats + (r.seats === 1 ? ' seat)' : ' seats)') : 'declined');
+    const body = [
+      updated ? 'A guest changed their RSVP.' : 'You have a new RSVP.',
+      '',
+      'Name:      ' + r.name,
+      'Mobile:    ' + r.mobile,
+      'Reply:     ' + r.attending,
+      'Seats:     ' + r.seats,
+      'Dietary:   ' + (r.diet || '-'),
+      'Message:   ' + (r.message || '-'),
+      'Time:      ' + r.stamp + ' (Philippine time)',
+      '',
+      'All replies: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl()
+    ].join('\n');
+    MailApp.sendEmail({ to: NOTIFY_EMAIL, subject: subject, body: body, name: 'Wedding RSVP' });
+  } catch (err) {
+    console.error('RSVP email failed: ' + err);              // see Executions in Apps Script
   }
 }
 
