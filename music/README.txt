@@ -1,7 +1,8 @@
-Put your wedding song here (an .mp3 under about 5 MB loads fastest).
-Then open index.html, find  music: { src: "" }  and write the file path, for example:
+The site plays music/blue.mp3 ("Blue" - female cover).
 
-    music: { src: "music/our-song.mp3" }
+To change the song: put an .mp3 here (about 5 MB or less loads fastest), then open
+index.html, find  music: { src: "music/blue.mp3" }  and write the new file path.
 
-Leave src empty and the music button stays hidden. Music never plays by itself:
-guests must tap the music button. Use a song you are allowed to share online.
+The song starts when the guest taps "Tap to open" on the envelope and loops while
+they scroll. The round button in the bottom-right corner mutes and unmutes it.
+Leave src empty ("") to turn music off and hide the button.

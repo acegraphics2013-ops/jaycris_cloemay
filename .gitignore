@@ -5,3 +5,6 @@ node_modules/
 
 # camera originals for the gallery (73 MB); the site uses the web copies in images/gallery/
 images/gallerry_add/
+
+# original full-size song (the site uses the smaller music/blue.mp3)
+music/*(Lyrics).mp3
